@@ -21,9 +21,6 @@ class PageController extends Controller
 {
     public function fallback(Event $event)
     {
-        if (Auth::check()) {
-            $event->grantItem(Item::findOrFail($event->items['404']), Auth::user(), 'opkmoj2qn3');
-        }
         // error handler will automatically return a proper response based on what is wanted
         throw new NotFoundHttpException;
     }

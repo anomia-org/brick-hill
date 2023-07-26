@@ -231,7 +231,6 @@ class EditController extends Controller
                 $validator = validator(request()->all(), $rules);
                 if ($validator->fails())
                     return JSONErr($validator->messages()->first());
-                $event->grantItem(Item::findOrFail($event->items['theme']), Auth::user(), 'asdfj23knklhn');
                 $user->theme = request('theme');
                 $user->save();
                 break;

@@ -36,8 +36,6 @@ class BuyRequestController extends Controller
             }
         }
 
-        $event->grantItem(Item::findOrFail($event->items['buyrequest']), Auth::user(), 'meowmeowrequest');
-
         $buy_request = BuyRequest::updateOrCreate(
             ['user_id' => Auth::id(), 'item_id' => $item->id],
             ['bucks' => request('bucks_amount'), 'active' => 1]

@@ -58,8 +58,6 @@ class RenderAPIController extends Controller
                 'right_leg' => '76603f',
                 'left_leg' => '76603f'
             ]);
-
-            $event->grantItem(Item::findOrFail($event->items['resetavatar']), Auth::user(), 'resetwtfasdf');
         }
 
         // we need to convert old avatars to the new format, this is basically what it converts to
