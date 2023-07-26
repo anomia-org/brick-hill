@@ -1,0 +1,29 @@
+
+
+.height-transition {
+    overflow: hidden;
+    transition: max-height 200ms;
+
+    &.slow {
+        transition: max-height 500ms;
+    }
+
+    &:not(.transition-mobile-only):not(.open) {
+        max-height: 0;
+    }
+
+    &:not(.transition-mobile-only).open {
+        max-height: 400px;
+    }
+
+    @media handheld,
+    only screen and (max-width: 767px) {
+        &.transition-mobile-only:not(.open) {
+            max-height: 0;
+        }
+
+        &.open {
+            max-height: 400px;
+        }
+    }
+}

@@ -1,0 +1,259 @@
+.user-description-box.closed {
+    max-height: 100px;
+    white-space: normal;
+    overflow: hidden;
+    position: relative;
+}
+
+.user-description-box:not(.closed) {
+    .user-desc {
+        padding-bottom: 24px;
+    }
+}
+
+.toggle-user-desc {
+    white-space: normal;
+    word-break: break-word;
+    min-height: 100px;
+
+    &:not(.open)::after {
+        background-color: $card-bg;
+        color: grey;
+        position: absolute;
+        content: '...';
+        text-align: right;
+        height: 24px;
+        padding-left: 5px;
+        bottom: -1px;
+        right: 0;
+        width: 100%
+    }
+}
+
+.read-more-desc {
+    position: absolute;
+    right: 0;
+    bottom: -5px;
+    padding: 5px;
+    padding-top: 0;
+    padding-bottom: 2px;
+    padding-left: 0;
+    margin-bottom: 1px;
+    z-index: 1000;
+    background-color: $card-bg
+}
+
+.read-more-desc:hover {
+  cursor: pointer;
+}
+
+.user-description-box {
+    position: relative;
+}
+
+.friends-list {
+    li {
+        text-align: center;
+        padding: 0 2px;
+
+        div {
+            width: 100%;
+        }
+    }
+}
+
+.profile-card {
+    width: 128px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    border-radius: 5px;
+    transition: background-color 50ms linear;
+    padding: 2px;
+    text-align: center;
+
+    &.award img {
+        height: 128px;
+        border: 1px solid $input-border;
+        border-radius: 5px;
+    }
+}
+
+.profile-card:hover {
+    background-color: $hover-card-hover;
+}
+
+.profile-card:not(.not-padded):not(:nth-child(3n)) {
+    margin-right: 5px
+}
+
+.profile-card:not(.crate) img {
+    height: 124px;
+    width: 124px;
+}
+
+.profile-card.crate img {
+    width: 100%;
+    border: 1px solid $input-border;
+    background-color: $card-bg;
+    border-radius: 5px;
+    padding: 5px
+}
+
+.profile-card.crate {
+    padding: 7px;
+    width: 100%;
+}
+
+.profile-card.crate:not(:nth-child(5n)) {
+    margin-right: 1px;
+}
+
+.friend-card {
+    width: 18.5%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    border-radius: 5px;
+    transition: background-color 50ms linear;
+    padding: 2px;
+    text-align: center;
+
+    &:hover {
+        background-color: $hover-card-hover
+    }
+
+    img {
+        height: 150px;
+        width: 150px;
+    }
+
+    button {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+}
+
+.trade-serial {
+    position: absolute;
+    margin: 4px;
+    border-radius: 4px;
+    padding: 3px;
+    background-color: $tab-bg-active;
+    font-size: 15px
+}
+
+.status-dot {
+    float: none;
+    display: inline-block;
+    margin-bottom: 3px;
+    background-color: $offline;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+
+    &.online {
+        background-color: $online;
+    }
+}
+
+.award-card {
+    height: 128px;
+
+    img {
+        width: 128px;
+        float: left;
+        height: 100%;
+        margin-right: 10px;
+    }
+}
+
+.crate-types {
+    border-right: 2px solid $input-border;
+    padding-right: 5px;
+
+    li {
+        cursor: pointer;
+        padding: 10px;
+        transition: background-color .1s linear;
+    }
+
+    li:first-child {
+        border-radius: 3px 3px 3px 0;
+    }
+
+    li:last-child {
+        border-radius: 0 3px 3px 3px;
+    }
+
+    .active,
+    :hover {
+        background-color: $vertical-tabs-active;
+        border-left: 4px solid $vertical-tabs-border;
+    }
+
+    :hover {
+        background-color: $vertical-tabs-hover;
+    }
+}
+
+.set-list {
+    .set-slider,
+    .set-slider li,
+    .set-slider ul {
+        height: 100%
+    }
+
+    .set {
+        &.active {
+            display: block;
+        }
+        &:not(.active) {
+            display: none;
+        }
+    }
+    
+    .set-title {
+        font-weight: 600;
+        font-size: 1.5rem;
+    }
+    
+    .set-stats {
+        text-align: center;
+        padding: 20px 20px 0;
+
+        li {
+            width: 50%;
+            display: inline-block;
+
+            div:first-child {
+                color: #797979
+            }
+        }
+    }
+}
+
+.slider-button {
+    top: 175px;
+    position: absolute;
+    text-align: center;
+    color: #000;
+    z-index: 1000;
+    padding: 5px;
+    transition: background-color .1s linear;
+
+    &:hover {
+        background-color: rgba(0,0,0,.24)
+    }
+
+    &.left {
+        border-radius: 0 3px 3px 0;
+        border-left: 0;
+    }
+
+    &.right {
+        border-radius: 3px 0 0 3px;
+        border-right: 0;
+        right: 0;
+    }
+}

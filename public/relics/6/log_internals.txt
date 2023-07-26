@@ -1,0 +1,654 @@
+LOG FOR **** BEGINS HERE
+
+##########################################
+
+HOURLY LOG 01-01-**;00:00:00.00.01
+
+TEMPERATURE\\ 		135°C
+RATING\\		NOMINAL
+STATE\\			ENABLED
+STATUS\\		FUNCTIONAL
+ADDRESS\\		46-BD-0C-D0-DC-71
+REQUESTS\\
+
+	NONE FOUND
+
+REQUEST-RECEIVED\\	0
+SPECIAL NOTES\\
+
+	HAPPY NEW YEAR!
+
+COMMAND-HISTORY\\
+
+[726571207769706520616c6c]
+
+>
+
+0 COMMANDS ENTERED
+1 INTERNAL COMMAND RUN
+
+
+END LOG
+
+##########################################
+
+HOURLY LOG 01-01-**;01:00:00.00.01
+
+TEMPERATURE\\ 		124°C
+RATING\\		NOMINAL
+STATE\\			ENABLED
+STATUS\\		FUNCTIONAL
+ADDRESS\\		46-BD-0C-D0-DC-71
+REQUESTS\\
+
+	NONE FOUND
+
+REQUEST-RECEIVED\\	0
+SPECIAL NOTES\\
+
+	HAPPY NEW YEAR!
+
+COMMAND-HISTORY\\
+
+>
+
+0 COMMANDS ENTERED
+
+
+END LOG
+
+##########################################
+
+HOURLY LOG 01-01-**;02:00:03.60.04
+
+TEMPERATURE\\ 		213°C
+RATING\\		OVERHEAT
+STATE\\			SHUTTING DOWN
+STATUS\\		NOT RESPONDING
+ADDRESS\\		46-BD-0C-D0-DC-71
+REQUESTS\\
+
+	ERROR
+
+REQUEST-RECEIVED\\	ERROR
+SPECIAL NOTES\\
+
+	ERROR
+
+COMMAND PROMPT DISABLED\\
+
+
+END LOG
+
+##########################################
+
+HOURLY LOG 01-01-**;03:00:00.00.02
+
+TEMPERATURE\\ 		27°C
+RATING\\		NOMINAL
+STATE\\			ENTERING HIBERNATION
+STATUS\\		DISABLED
+ADDRESS\\		46-BD-0C-D0-DC-71
+REQUESTS\\
+
+	ERROR
+
+REQUEST-RECEIVED\\	ERROR
+SPECIAL NOTES\\
+
+	ERROR
+
+COMMAND PROMPT DISABLED\\
+
+
+END LOG
+
+##########################################
+
+##########################################
+
+SHUTDOWN LOG 01-01-**;03:04:23.55.34
+
+USER: SUPERADMIN
+
+SHUTTING DOWN AND ENTERING HIBERNATION WITH REASON
+
+	UNKNOWN SUBSTANCE IN CORE
+
+END LOG
+
+###########################################
+
+##########################################
+
+
+
+
+
+
+
+
+##########################################
+
+##########################################
+
+STARTUP LOG 01-03-**;17:55:43.76.43
+
+TEMPERATURE\\ 		40°C
+RATING\\		NOMINAL
+STATE\\			ENABLED
+STATUS\\		FUNCTIONAL
+ADDRESS\\		46-BD-0C-D0-DC-71
+REQUESTS\\
+
+	1: PLEASE DO NOT POUR ALCOHOL DOWN THE EXHAUST PORT
+
+REQUEST-RECEIVED\\	1
+SPECIAL NOTES\\
+
+	NONE FOUND
+
+COMMAND-HISTORY\\
+
+>
+
+0 COMMANDS ENTERED
+
+
+END LOG
+
+##########################################
+
+HOURLY LOG 01-03-**;18:00:00.00.01
+
+TEMPERATURE\\ 		132°C
+RATING\\		NOMINAL
+STATE\\			STARTING UP
+STATUS\\		FUNCTIONAL
+ADDRESS\\		46-BD-0C-D0-DC-71
+REQUESTS\\
+
+	1: PLEASE DO NOT POUR ALCOHOL DOWN THE EXHAUST PORT
+
+REQUEST-RECEIVED\\	1
+SPECIAL NOTES\\
+
+	NONE FOUND
+
+COMMAND-HISTORY\\
+
+>logon motaa *********
+Invalid credentials.
+
+>logon motaa ***********
+Welcome, motaa. You are in the ADMIN group.
+
+>qmsg 46-bd-0c-d0-dc-71 sorry.
+Quick message to andOS sent.
+
+>req del 1
+Request deleted.
+
+>logoff
+Logged off.
+
+5 COMMANDS ENTERED
+
+
+END LOG
+
+##########################################
+
+HOURLY LOG 01-03-**;19:00:00.00.01
+
+TEMPERATURE\\ 		134°C
+RATING\\		NOMINAL
+STATE\\			ENABLED
+STATUS\\		FUNCTIONAL
+ADDRESS\\		46-BD-0C-D0-DC-71
+REQUESTS\\
+
+	1: YOU ARE FORGIVEN, MOTAA
+
+REQUEST-RECEIVED\\	2
+SPECIAL NOTES\\
+
+	NONE FOUND
+
+COMMAND-HISTORY\\
+
+>logon sbones *******
+Welcome, sbones. You are in the ADMIN group.
+
+>qmsg 46-bd-0c-d0-dc-71 what did she do this time
+Quick message to andOS sent.
+
+>inbox
+You have 1 new message.
+
+>inbox open 1
+FROM: 46-BD-0C-D0-DC-71 (andOS) / ADMIN / 01-03-**;18:54 (0 minutes ago)
+RE:UNTITLED
+
+SHE POURED A FULL GLASS OF CHAMPAGNE DOWN ONE OF MY EXHAUST PORTS LEADING ME TO OVERHEAT AND FORCE A SHUTDOWN UNTIL IT EVAPORATED
+
+-
+
+>qreply rough dude
+Reply sent to andOS.
+
+>inbox open 1
+FROM: 46-BD-0C-D0-DC-71 (andOS) / ADMIN / 01-03-**;18:55 (0 minutes ago)
+RE:RE:RE:UNTITLED
+
+I DO NOT KNOW WHAT THESE WORDS MEAN
+
+-
+
+>qreply see you later andy
+Reply sent to andOS.
+
+>req del 1
+Request deleted.
+
+>logoff
+Logged off.
+
+9 COMMANDS ENTERED
+
+
+END LOG
+
+##########################################
+
+HOURLY LOG 01-03-**;20:00:00.08.03
+
+TEMPERATURE\\ 		118°C
+RATING\\		NOMINAL
+STATE\\			SHUTTING DOWN
+STATUS\\		FUNCTIONAL
+ADDRESS\\		46-BD-0C-D0-DC-71
+REQUESTS\\
+
+	NONE FOUND
+
+REQUEST-RECEIVED\\	2
+SPECIAL NOTES\\
+
+	NONE FOUND
+
+COMMAND-HISTORY\\
+
+>shutdown -s
+Enter password for ADMIN
+
+>***************
+Are you sure? (y/n)
+
+>y
+Would you like to log this SHUTDOWN?
+
+>y generator is down. conserving power. mota.
+Shutting down...
+
+4 COMMANDS ENTERED
+
+
+END LOG
+
+##########################################
+
+##########################################
+
+SHUTDOWN LOG 01-03-**;20:05:33.21.87
+
+USER: ADMIN
+
+SHUTTING DOWN AND ENTERING HIBERNATION WITH REASON
+
+	generator is down. conserving power. mota.
+
+END LOG
+
+###########################################
+
+###########################################
+
+
+
+
+
+
+
+
+###########################################
+
+###########################################
+
+STARTUP LOG 01-07-**;4:21:55.98.02
+
+TEMPERATURE\\ 		38°C
+RATING\\		NOMINAL
+STATE\\			STARTING UP
+STATUS\\		FUNCTIONAL
+ADDRESS\\		46-BD-0C-D0-DC-71
+REQUESTS\\
+
+	NONE FOUND
+
+REQUEST-RECEIVED\\	2
+SPECIAL NOTES\\
+
+	HAPPY BIRTHDAY!
+
+COMMAND-HISTORY\\
+
+>
+
+0 COMMANDS ENTERED
+
+
+END LOG
+
+##########################################
+
+HOURLY LOG 01-07-**;05:00:00.00.03
+
+TEMPERATURE\\ 		112°C
+RATING\\		NOMINAL
+STATE\\			ENABLED
+STATUS\\		FUNCTIONAL
+ADDRESS\\		46-BD-0C-D0-DC-71
+REQUESTS\\
+
+	NONE FOUND
+
+REQUEST-RECEIVED\\	2
+SPECIAL NOTES\\
+
+	HAPPY BIRTHDAY!
+
+COMMAND-HISTORY\\
+
+>logon motaa ***********
+Welcome, motaa. You are in the ADMIN group.
+
+>inbox
+You have 2443 new messages.
+
+>inbox list
+1 FROM: 46-BD-0C-D0-DC-71 (andOS) | ADMIN // UNTITLED / 01-07-**;04:45 (1 minute ago)
+2 FROM: 46-BD-0C-D0-DC-71 (andOS) | ADMIN // UNTITLED / 01-07-**;04:34 (12 minutes ago)
+3 FROM: 46-BD-0C-D0-DC-71 (andOS) | ADMIN // UNTITLED / 01-07-**;04:22 (24 minutes ago)
+4 FROM: 46-BD-0C-D0-DC-71 (andOS) | ADMIN // UNTITLED / 01-07-**;04:21 (25 minutes ago)
+5 FROM: 46-BD-0C-D0-DC-71 (andOS) | ADMIN // UNTITLED / 01-07-**;04:21 (25 minutes ago)
+PAGE 1 OF 563
+
+>inbox list 2
+6 FROM: 46-BD-0C-D0-DC-71 (andOS) | ADMIN // UNTITLED / 01-07-**;04:21 (25 minutes ago)
+7 FROM: 46-BD-0C-D0-DC-71 (andOS) | ADMIN // UNTITLED / 01-07-**;04:21 (25 minutes ago)
+8 FROM: 46-BD-0C-D0-DC-71 (andOS) | ADMIN // UNTITLED / 01-07-**;04:21 (25 minutes ago)
+9 FROM: sbones | ADMIN // hey / 01-07-**;04:05 (41 minutes ago)
+10 FROM: 46-BD-0C-D0-DC-71 (andOS) | ADMIN // UNTITLED / 01-03-**;17:35 (83 hours ago)
+PAGE 2 OF 563
+
+>inbox open 9
+FROM: sbones | ADMIN
+hey
+
+i went ahead and mailed the hat to the curator. also i should let you know i think ive got a lead on something bigger, so if youre wondering why im not at camp thats why
+
+and happy birthday, too. take the day off. you deserve it.
+
+thanks for the pen.
+
+-
+
+>logs ~ 1-4-**
+There are 0 system logs between 01-07-**;04:47 and 01-04-**;00:00 .
+
+>logs ~ 1-4-** internal
+There are 0 internal logs between 01-07-**;04:47 and 01-04-**;00:00 .
+
+>logs bin
+The logs bin is empty.
+
+>bin
+The recycle bin is empty.
+
+>msg sbones
+Type a title for your message, or press enter for UNTITLED.
+
+>Logs??
+Type a body for your message, or press enter to cancel.
+
+>How were you able to access andy without it logging you? Are you deleting logs? Do I need to tell you how bad of an idea that is?
+Message titled 'Logs??' sent to sbones.
+
+>bcc 1 46-bd-0c-d0-dc-71
+Send a blind carbon copy of 'Logs??' to 46-bd-0c-d0-dc-71 (andOS)? (y/n)
+
+>y
+Message to andOS sent.
+
+[6f70656e206c6f675f696e7465726e616c732e747874]
+[65786974206c6f675f696e7465726e616c732e747874]
+
+>inbox list
+1 FROM: 46-BD-0C-D0-DC-71 (andOS) | ADMIN // UNTITLED / 01-07-**;04:49 (0 minutes ago)
+2 FROM: 46-BD-0C-D0-DC-71 (andOS) | ADMIN // UNTITLED / 01-07-**;04:45 (4 minutes ago)
+3 FROM: 46-BD-0C-D0-DC-71 (andOS) | ADMIN // UNTITLED / 01-07-**;04:34 (15 minutes ago)
+4 FROM: 46-BD-0C-D0-DC-71 (andOS) | ADMIN // UNTITLED / 01-07-**;04:22 (27 minutes ago)
+5 FROM: 46-BD-0C-D0-DC-71 (andOS) | ADMIN // UNTITLED / 01-07-**;04:21 (28 minutes ago)
+
+>inbox open 1
+FROM: 46-BD-0C-D0-DC-71 (andOS) / ADMIN / 01-07-**;04:49 (0 minutes ago)
+RE:Logs?? (BCC)
+
+I CAN NOT RECALL YOU MUST ASK SBONES THEMSELF
+
+-
+
+>gfdhrtcx
+Invalid command. Type '?' for help.
+
+>logoff
+Logged off.
+
+17 COMMANDS ENTERED
+2 INTERNAL COMMANDS RUN
+
+
+END LOG
+
+##########################################
+
+HOURLY LOG 01-07-**;05:00:00.00.03
+
+TEMPERATURE\\ 		119°C
+RATING\\		NOMINAL
+STATE\\			SHUTTING DOWN
+STATUS\\		FUNCTIONAL
+ADDRESS\\		46-BD-0C-D0-DC-71
+REQUESTS\\
+
+	NONE FOUND
+
+REQUEST-RECEIVED\\	2
+SPECIAL NOTES\\
+
+	NONE FOUND
+
+COMMAND-HISTORY\\
+
+>logon motaa ***********
+Welcome, motaa. You are in the ADMIN group.
+
+>shutdown -s
+Are you sure? (y/n)
+
+>y
+Would you like to log this SHUTDOWN?
+
+>y im visiting home. mota.
+Shutting down...
+
+4 COMMANDS ENTERED
+
+
+END LOG
+
+##########################################
+
+##########################################
+
+SHUTDOWN LOG 01-07-**;05:01:04.19.83
+
+USER: motaa
+
+SHUTTING DOWN AND ENTERING HIBERNATION WITH REASON
+
+	im visiting home. mota.
+
+END LOG
+
+###########################################
+
+###########################################
+
+
+
+
+
+
+
+
+###########################################
+
+###########################################
+
+STARTUP LOG 01-11-**;18:45:32.43.01
+
+TEMPERATURE\\ 		31°C
+RATING\\		NOMINAL
+STATE\\			STARTING UP
+STATUS\\		FUNCTIONAL
+ADDRESS\\		46-BD-0C-D0-DC-71
+REQUESTS\\
+
+	NONE FOUND
+
+REQUEST-RECEIVED\\	2
+SPECIAL NOTES\\
+
+	NONE FOUND
+
+COMMAND-HISTORY\\
+
+>
+
+0 COMMANDS ENTERED
+
+
+END LOG
+
+##########################################
+
+HOURLY LOG 01-11-**;19:00:00.00.00.02
+
+TEMPERATURE\\ 		111°C
+RATING\\		NOMINAL
+STATE\\			ENABLED
+STATUS\\		FUNCTIONAL
+ADDRESS\\		46-BD-0C-D0-DC-71
+REQUESTS\\
+
+	NONE FOUND
+
+REQUEST-RECEIVED\\	2
+SPECIAL NOTES\\
+
+	NONE FOUND
+
+COMMAND-HISTORY\\
+
+>logon sbones *******
+Welcome, sbones. You are in the ADMIN group.
+
+>inbox
+You have 1 new message.
+
+>inbox open 1
+FROM: motaa / ADMIN / 01-07-**;04:48 (110 hours ago)
+Logs??
+
+How were you able to access andy without it logging you? Are you deleting logs? Do I need to tell you how bad of an idea that is?
+
+-
+
+>inbox
+You have no new messages.
+
+>/scan
+Directory changed to */root/scan.
+
+>connect {scan}
+Connecting to scanner...
+
+[74756e6e656c2039422d33382d36452d30412d4141]
+
+Scanner accessed.
+
+>scan/open
+Door opened.
+
+>scan/close
+Door closed.
+
+>scan/run
+Beginning scan...
+
+{=====================================}
+
+Complete! Saved as scan/newscan.ska
+
+9 COMMANDS ENTERED
+1 INTERNAL COMMAND RUN
+
+
+END LOG
+
+##########################################
+
+CRASH LOG 01-11-**;19:06:67.54.23
+
+TEMPERATURE\\ 		7647°C
+RATING\\		NOMINAL
+STATE\\			SHUTTING DOWN
+STATUS\\		NOT RESPONDING
+ADDRESS\\		46-BD-0C-D0-DC-71
+REQUESTS\\
+
+	1
+
+REQUEST-RECEIVED\\	3
+SPECIAL NOTES\\
+
+	7
+
+COMMAND-HISTORY\\
+
+>select scan/newscan.ska
+scan/newscan.ska selected.
+
+>rename relicUnk.ska
+Renamed to relicUnk.ska
+
+>print relicUnk.ska
+Printing...
+
+Printing...
+
+Printing..
+
+WRITE ERRORWRITE ERRORWRITE ERRORWRITE ERRORWRITE ERRORWRITE ERRORWRITE ERRORWRITE ERRORWRITE ERRORWRITE ERRORWRITE ERRORWRITE ERRORWRITE ERRORWRITE ERRORWRITE ERRORWRITE ERRORWRITE ERRORWRITE ERRORWRITE ERRORWRITE ERRORWRITE ERRORWRITE ERRORWRITE ERRORWRITE ERRORWRITE ERRORWRITE ERRORWRITE ERRORWRITE ERRORWRITE ERRORWRITE ERRORWRITE ERRORWRITE ERRORWRITE ERRORWRITE ERRORWRITE ERRORWRITE ERRORWRITE ERRORWRITE ERRORWR

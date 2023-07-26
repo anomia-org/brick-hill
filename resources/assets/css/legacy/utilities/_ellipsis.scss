@@ -1,0 +1,8 @@
+// from https://gist.github.com/plapier/4954935
+@mixin ellipsis ($max-width){
+    display: inline-block;
+    max-width: $max-width;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

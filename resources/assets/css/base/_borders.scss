@@ -1,0 +1,15 @@
+.border-right {
+    border-right: 1px solid;
+
+    @include themify() {
+        border-color: themed("inputs", "blend-border");
+    }
+}
+
+.border-bottom {
+    border-bottom: 1px solid;
+
+    @include themify() {
+        border-color: themed("inputs", "blend-border");
+    }
+}

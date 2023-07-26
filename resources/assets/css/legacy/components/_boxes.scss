@@ -1,0 +1,40 @@
+.box {
+    border: 1px solid $box-border;
+    border-radius: $border-radius;
+
+    &.shaded {
+        background-color: $box-shaded;
+    }
+
+    &.img {
+        text-align: center;
+    }
+
+    &.game-img {
+        border: 0px transparent;
+
+        img {
+            border-radius: $border-radius;
+            width: 100%;
+            display: block;
+        }
+    }
+
+    &.item-img {
+        padding: 50px;
+        text-align: center;
+
+        img {
+            width: 100%;
+        }
+    }
+
+    &.item-img.special {
+        border: 5px solid $special;
+    }
+
+    &.item-img.owns {
+        border: 5px solid $owns;
+    }
+
+}

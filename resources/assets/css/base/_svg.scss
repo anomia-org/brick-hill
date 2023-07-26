@@ -1,0 +1,62 @@
+.svg-icon {
+    height: 16px;
+    vertical-align: text-top;
+    padding-top: 1px;
+    overflow: visible;
+}
+
+.svg-icon-margin {
+    margin-right: 5px;
+}
+
+.svg-icon-margin-left {
+    margin-left: 5px;
+}
+
+.svg-icon-medium-text {
+    height: 20px;
+    vertical-align: text-bottom;
+}
+
+.svg-icon-text {
+    height: 16px;
+    vertical-align: text-bottom;
+}
+
+.svg-icon-small {
+    height: 12px;
+    overflow: visible;
+}
+
+.svg-icon-large {
+    height: 28px;
+    vertical-align: text-bottom;
+}
+
+.svg-notif-icon {
+    height: 16px;
+    vertical-align: text-top;
+    padding-top: 1px;
+    margin-right: 2px;
+    overflow: visible;
+}
+
+.svg-rotate {
+    transition: transform 200ms;
+
+    &.rotated {
+        transform: rotate(-90deg);
+    }
+}
+
+.svg-black {
+    @include themify($themes) {
+        filter: themed("white-svg-invert");
+    }
+}
+
+.svg-white {
+    @include themify($themes) {
+        filter: themed("black-svg-invert");
+    }
+}

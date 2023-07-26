@@ -1,0 +1,24 @@
+@import "util/theme_mixins";
+@import "pages/landing";
+.new-theme {
+    @import "base/borders";
+    @import "base/elements";
+    @import "base/flex";
+    @import "base/headers";
+    @import "base/inputs";
+    @import "base/margins";
+    @import "base/mobile";
+    @import "base/notifications";
+    @import "base/svg";
+    @import "base/tables";
+    @import "base/tabs";
+    @import "base/text";
+    @import "base/transitions";
+    // for scss that is used in multiple components
+    @import "pages/footer";
+    @import "pages/items";
+    @import "pages/landing";
+    @import "pages/rules";
+    @import "pages/dash";
+    @import "pages/trade";
+}

@@ -1,0 +1,251 @@
+.bucks-icon.bucks-take {
+    margin-left: 1.75px;
+    padding: 0;
+}
+
+.trade-items {
+    text-align: center;
+}
+
+.trade-items-view {
+    width: 70%;
+}
+
+.tile-transition {
+    transition: all .5s ease-in-out;
+}
+
+.item-card-tile.small-tile {
+    margin-top: 2.5px;
+    width: calc(25% - 15px);
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+
+.tile-holder {
+    margin-top: -5px;
+    margin-bottom: 11.5px;
+    &:not(.no-center) {
+        text-align: center;
+    }
+}
+
+.tile-holder.tile-transition {
+    overflow: hidden;
+}
+
+.item-card-tile {
+    position: relative;
+    margin-top: 5px;
+    width: calc(33.33% - 10px);
+    z-index: 1;
+    cursor: pointer;
+    margin-right: 10px;
+    &:nth-child(3n),
+    &:last-child {
+        margin-right: 0px;
+    }
+}
+
+.item-card-tile.selected .item-card-container {
+    border: 2px solid #4CB04C;
+    padding: 3px;
+}
+
+.trade-serial {
+    margin-left: 5px;
+    padding-left: 9px;
+    padding-right: 9px;
+}
+
+.item-card-data .bucks-icon {
+    transform: scale(0.8);
+    margin-top: 1.75px;
+    padding: 0;
+}
+
+.item-card-data {
+    margin-left: 3px;
+}
+
+.item-card-container {
+    text-align: left;
+    border-radius: 3px;
+    padding: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.item-card-image {
+    padding: 3px;
+}
+
+.item-card-image img {
+    width: 100%;
+}
+
+.item-card-name {
+    margin: 3px;
+}
+
+.item-card-tile.five-wide {
+    width: calc(40%);
+    margin-right: 0px;
+    &:nth-child(5n) {
+        margin-right: 0px;
+    }
+}
+
+.trade-title {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.trade-select {
+    width: 95%;
+}
+
+.trade-picker {
+    margin-top: 10px;
+    overflow: hidden;
+    overflow-y: scroll;
+    max-height: 1024px;
+    hr {
+        margin: 4px;
+    }
+    .trade {
+        margin-top: 3px;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+        height: 90px;
+        width: 100%;
+        cursor: pointer;
+        padding: 10px;
+        @include themify($themes) {
+            border-bottom: 1px solid themed('divider');
+
+            &:hover {
+                background-color: themed('card-hover');
+            }
+            &.selected {
+                background-color: themed('card-hover');
+            }
+        }
+        .username {
+            margin: auto;
+            margin-left: 0;
+            max-width: 55%;
+        }
+        .trade-user-thumbnail {
+            width: auto;
+            height: 100%;
+            margin-right: 10px;
+        }
+        .trade-inner {
+            width: 100%;
+        }
+        .trade-time {
+            margin: 0;
+            font-size: 14px;
+            margin-right: 5px;
+        }
+        .trade-info {
+            height: 30%;
+            margin-top: 5px;
+        }
+    }
+}
+
+.full-width {
+    width: 100%;
+}
+
+.trade-bucks {
+    font-size: 3.2rem;
+}
+
+.small-h-margin-r {
+    margin-right: 9px;
+}
+
+.small-h-margin {
+    margin: 0 11px;
+}
+
+.svg-container {
+    display: flex;
+    align-items: center;
+    &:first-child {
+        margin-left: 0;
+    }
+}
+
+
+.small-padding {
+    padding: 8px 0;
+}
+
+.small-margin {
+    margin: 8px 0;
+}
+
+.override-trade-col {
+    padding-right: 20px !important;
+}
+
+.divider {
+    @include themify($themes) {
+        border-top: 1px solid themed('divider');
+    }
+}
+
+.trade-item-holder {
+    flex-wrap: wrap;
+    width: 100%;
+
+    @include themify($themes) {
+        .selected .item-border {
+            border: 2px solid themed("blue");
+            border-radius: 3px;
+        }    
+    }
+}
+
+.trade-user-card {
+    width: 20%;
+    margin-left: auto;
+}
+
+
+@media handheld, only screen and (max-width: 1140px) {
+    .view-trades-flex {
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+
+    .trade-item-holder {
+        width: 100%;
+        margin: auto;
+        align-items: center;
+        margin-top: 15px;
+    }
+    
+    .trade-user-card {
+        margin: auto;
+        width: 40%;
+
+        img {
+            width: 70% !important;
+        }
+    }
+
+    .trade-items-view {
+        max-width: 100%;
+    }
+}
+
+@media handheld, only screen and (min-width: 1430px) {
+    .trade-card:last-child {
+        padding-right: 20px !important;
+    }
+}

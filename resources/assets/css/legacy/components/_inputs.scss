@@ -1,0 +1,82 @@
+input, textarea {
+    padding: 4px;
+    color: $textarea-color;
+    border-radius: $border-radius;
+    background-color: $input-bg;
+    border: 1px solid $input-border;
+
+    &.rigid {
+        border-radius: 2px;
+        color: #797979;
+        padding: 10px;
+        background-color: $input-box-bg;
+        border: 1px solid $input-box-border;
+    }
+
+    &::placeholder {
+        font-weight: 600;
+        color: $input-placeholder;
+    }
+
+    &:focus {
+        outline:none;
+    }
+}
+
+.input-group {
+    display: inline-flex;
+    margin-bottom: 4px;
+    overflow: auto;
+    border-radius: $border-radius;
+    border: 1px solid $input-border;
+
+    &.fill {
+        display: flex;
+        align-items: stretch;
+
+        .input-button {
+            flex: 0;
+        }
+        input, textarea, .input {
+            flex: 1;
+        }
+    }
+
+    &.rigid {
+        border-radius: 2px;
+        color: #797979;
+        padding: 10px;
+        background-color: $input-box-bg;
+        color: $input-box-color;
+        border: 1px solid $input-box-border;
+    }
+
+    input,textarea, .input-button {
+        flex: 1;
+        border-radius: 0;
+        border: none;
+    }
+
+    .input-button {
+        border-left: 1px solid $input-group-button-border;
+        color: $input-group-button-color;
+        background-color: $input-group-button-bg;
+        padding: 4px 15px;
+        font-size: 13.3px;
+        font-weight: 600;
+    }
+
+    .input-button:hover {
+        cursor: pointer;
+    }
+
+}
+
+.width-100 {
+    display: block;
+    width: 100%;
+}
+
+.margin-5 {
+    margin-bottom: 5px;
+}

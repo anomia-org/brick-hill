@@ -1,0 +1,196 @@
+include:
+    - template: Terraform/Base.gitlab-ci.yml
+
+stages:
+    - dependencies
+    - test
+    - build
+    - deploy
+
+variables:
+    DOCKER_REGISTRY: .dkr.ecr.us-east-1.amazonaws.com
+    DOCKER_PRODUCTION: brickhill/site/production
+    DOCKER_NGINX: brickhill/site/nginx
+    MYSQL_DATABASE: brickhill
+    MYSQL_ROOT_PASSWORD: secret
+    TF_STATE_NAME: default
+    TF_CACHE_KEY: default
+    TF_ROOT: ci/terraform/prod
+
+# terraform-fmt:
+#     stage: test
+#     extends: .terraform:fmt
+#     needs: []
+
+# terraform-validate:
+#     stage: test
+#     extends: .terraform:validate
+#     needs: []
+
+# terraform-build:
+#     extends: .terraform:build
+
+# terraform-apply:
+#     extends: .terraform:deploy
+#     dependencies:
+#         - terraform-build
+#     environment:
+#         name: $TF_STATE_NAME
+
+composer:
+    stage: dependencies
+    image: composer:2
+    cache:
+        key: composer
+        paths:
+            - vendor/
+    only:
+        - merge_requests
+    script:
+        - apk add --no-cache linux-headers
+        - docker-php-ext-install sockets
+        - composer install --prefer-dist --no-ansi --no-interaction --no-progress
+    artifacts:
+        expire_in: 1 week
+        paths:
+            - vendor/
+
+npm:
+    stage: dependencies
+    image: node:18-alpine
+    cache:
+        key: npm
+        paths:
+            - node_modules/
+    only:
+        - master
+        - merge_requests
+    script:
+        - npm install
+        # copy production as it needs production variables to compile properly
+        - cp .env.production .env
+        - npm run production
+    artifacts:
+        expire_in: 1 week
+        paths:
+            - public/
+
+static-analysis-php:
+    stage: test
+    image: registry.gitlab.com/brickhill/site/laravel-docker:latest
+    cache:
+        key: larastan
+        paths:
+            - storage/app/cache/
+    services:
+        - mysql:8.0
+    variables:
+        MYSQL_DATABASE: brickhill
+        MYSQL_ROOT_PASSWORD: secret
+    dependencies:
+        - composer
+    only:
+        - merge_requests
+    before_script:
+        - cp .env.testing .env
+        - mysql --host=mysql --user=root --password=secret < ./docker/dev/mysql/init/01.sql
+        - php artisan migrate
+        - php artisan ide-helper:model --write
+    script:
+        - mkdir -p storage/app/cache
+        - ls storage/app/cache
+        - ./vendor/bin/phpstan analyse --memory-limit=2G
+
+test-php:
+    stage: test
+    image: registry.gitlab.com/brickhill/site/laravel-docker:latest
+    services:
+        - mysql:8.0
+        - redis:alpine
+    variables:
+        MYSQL_DATABASE: brickhill
+        MYSQL_ROOT_PASSWORD: secret
+    dependencies:
+        - composer
+        - npm
+    only:
+        - merge_requests
+    script:
+        - php artisan test --configuration phpunit_ci.xml
+
+build-php:
+    stage: build
+    image:
+        name: gcr.io/kaniko-project/executor:debug
+        entrypoint: [""]
+    dependencies:
+        - npm
+    only:
+        - master
+    script:
+        - cp .env.production .env
+        - |
+            cat <<EOF > /kaniko/.docker/config.json
+            {
+              "auths": {
+                "$CI_REGISTRY": {
+                  "username": "$CI_REGISTRY_USER",
+                  "password": "$CI_REGISTRY_PASSWORD"
+                }
+              },
+              "credHelpers": {
+                "$DOCKER_REGISTRY": "ecr-login"
+              }
+            }
+            EOF
+        - /kaniko/executor --context $CI_PROJECT_DIR --cache=true --build-arg SITE_PHP_VERSION=$SITE_PHP_VERSION --dockerfile $CI_PROJECT_DIR/Dockerfile --target=prod --destination $DOCKER_REGISTRY/$DOCKER_PRODUCTION:latest --destination $DOCKER_REGISTRY/$DOCKER_PRODUCTION:$CI_PIPELINE_IID
+
+build-nginx:
+    stage: build
+    image:
+        name: gcr.io/kaniko-project/executor:debug
+        entrypoint: [""]
+    only:
+        - master
+    script:
+        - |
+            cat <<EOF > /kaniko/.docker/config.json
+            {
+              "auths": {
+                "$CI_REGISTRY": {
+                  "username": "$CI_REGISTRY_USER",
+                  "password": "$CI_REGISTRY_PASSWORD"
+                }
+              },
+              "credHelpers": {
+                "$DOCKER_REGISTRY": "ecr-login"
+              }
+            }
+            EOF
+        - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/docker/nginx/Dockerfile --destination $DOCKER_REGISTRY/$DOCKER_NGINX:latest --destination $DOCKER_REGISTRY/$DOCKER_NGINX:$CI_PIPELINE_IID
+
+assets-to-s3:
+    stage: build
+    image:
+        name: amazon/aws-cli
+        entrypoint: [""]
+    dependencies:
+        - npm
+    only:
+        - master
+    script:
+        - aws s3 sync public/dist/js s3://js.brkcdn.com/
+        - aws s3 sync public/dist/css s3://css.brkcdn.com/
+
+update-service:
+    stage: deploy
+    image:
+        name: amazon/aws-cli
+        entrypoint: [""]
+    dependencies: []
+    only:
+        - master
+    script:
+        - aws ecs update-service --cluster $CI_AWS_ECS_CLUSTER --service $CI_AWS_ECS_PROD_SERVICE --force-new-deployment
+        - aws ecs update-service --cluster $CI_AWS_ECS_CLUSTER --service $CI_AWS_ECS_SCHEDULER_SERVICE --force-new-deployment
+        - aws ecs update-service --cluster $CI_AWS_ECS_CLUSTER --service $CI_AWS_ECS_QUEUE_SERVICE --force-new-deployment

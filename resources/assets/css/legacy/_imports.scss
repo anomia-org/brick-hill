@@ -1,0 +1,64 @@
+// Utilities - global mixins, functions, etc.
+@import "utilities/smart-get";
+@import "utilities/multi-line-ellipsis";
+@import "utilities/ellipsis";
+@import "utilities/color-classes";
+@import "utilities/flex";
+@import "utilities/misc"; // collection of helper classes like overflow-auto
+
+// Base - foundation (you shouldn't need to edit anything here jefemy)
+@import "base/reset";
+@import "base/typography"; // is it superfluous to have this many base files? yes
+
+// Layout - navbar, footer, etc.
+@import "layout/navbar"; // Includes all of the styles in the navbar (e.g. info-box, nav notifs, etc.)
+
+// Compotents - cards, buttons, etc.
+@import "components/ads";
+@import "components/cards";
+@import "components/label";
+@import "components/buttons";
+@import "components/inputs"; // inputs and textareas
+@import "components/select";
+@import "components/text"; // move this to utilities!!
+@import "components/misc";
+@import "components/tabs";
+@import "components/vertical-tabs";
+@import "components/boxes";
+@import "components/modal";
+@import "components/hover-card";
+@import "components/more-popover";
+@import "components/pagination";
+@import "components/fieldset";
+@import "components/white-space"; // make this a utility!!
+
+// Pages - styles that are only on certain pages like the (((membership))) page
+//@import "pages/docs.scss"; //testing
+
+@import "pages/misc/search";
+@import "pages/misc/clan";
+@import "pages/misc/forum";
+@import "pages/misc/membership";
+@import "pages/misc/sets";
+@import "pages/misc/download";
+@import "pages/misc/events";
+@import "pages/shop/shop";
+@import "pages/shop/upload";
+@import "pages/user/tfa";
+@import "pages/user/trade";
+@import "pages/user/profile";
+@import "pages/user/register";
+@import "pages/user/avatar";
+@import "pages/user/settings";
+
+// Vendor - external css frameworks (e.g. simplegrid)
+@import "vendor/simple-grid";
+@import "vendor/icons";
+@import "vendor/emoticons";
+
+/*
+Any other questions about this strucuture?
+See: https://scotch.io/tutorials/aesthetic-sass-1-architecture-and-style-organization
+(This is where I snagged the strucuture from)
+~Mikuchan03 uwu
+*/

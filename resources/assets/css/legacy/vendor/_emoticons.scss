@@ -1,0 +1,70 @@
+@font-face {
+    font-family: 'emote';
+    src: url('../assets/fonts/emotes.ttf'), url('../assets/fonts/emote.svg');
+    font-weight: normal;
+    font-style: normal;
+}
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    @font-face {
+        font-family: 'fontello';
+        src: url('../font/fontello.svg?31647021#fontello') format('svg');
+    }
+}
+
+Fontello emo font
+*/
+ 
+ [class^="emote-"]:before, [class*=" emote-"]:before {
+    font-family: "emote"; 
+    font-style: normal;
+    font-weight: normal;
+ 
+    display: inline-block;
+    text-decoration: inherit;
+    width: 1em;
+    margin-right: .2em;
+    text-align: center;
+    /* opacity: .8; */
+ 
+    /* For safety - reset parent styles, that can break glyph codes*/
+    font-variant: normal;
+    text-transform: none;
+ 
+    /* fix buttons height, for twitter bootstrap */
+    line-height: 1em;
+ 
+    /* Animation center compensation - margins should be symmetric */
+    /* remove if not needed */
+    margin-left: .2em;
+ 
+    /* you can be more comfortable with increased icons size */
+    /* font-size: 120%; */
+ 
+    /* Font smoothing. That was taken from TWBS */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+ 
+    /* Uncomment for 3D effect */
+    /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
+ 
+.emote-happy:before { content: '\e800'; } /* '' */
+.emote-wink:before { content: '\e801'; } /* '' */
+.emote-sad:before { content: '\e802'; } /* '' */
+.emote-sleep:before { content: '\e803'; } /* '' */
+.emote-thumbsup:before { content: '\e804'; } /* '' */
+.emote-surprised:before { content: '\e806'; } /* '' */
+.emote-tongue:before { content: '\e807'; } /* '' */
+.emote-coffee:before { content: '\e808'; } /* '' */
+.emote-sunglasses:before { content: '\e809'; } /* '' */
+.emote-displeased:before { content: '\e80a'; } /* '' */
+.emote-grin:before { content: '\e80c'; } /* '' */
+.emote-angry:before { content: '\e80d'; } /* '' */
+.emote-saint:before { content: '\e80e'; } /* '' */
+.emote-cry:before { content: '\e80f'; } /* '' */
+.emote-squint:before { content: '\e811'; } /* '' */
+.emote-laugh:before { content: '\e812'; } /* '' */
+.emote-wink2:before { content: '\e813'; } /* '' */

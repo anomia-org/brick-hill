@@ -1,0 +1,17 @@
+includes:
+    - ./vendor/nunomaduro/larastan/extension.neon
+
+parameters:
+    level: 5
+    checkOctaneCompatibility: true
+    checkModelProperties: true
+    tmpDir: storage/app/cache
+    paths:
+        - app
+        - tests
+    excludePaths:
+        - app/Virtual
+    ignoreErrors:
+        - 
+          message: '#Call to an undefined method Illuminate\\Database\\Eloquent\\Model::#'
+          path: app/Extensions/Search/OpenSearchEngine.php

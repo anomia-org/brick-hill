@@ -1,0 +1,28 @@
+.flex-container, .fp {
+    display: flex;
+
+    &.flex-column {
+        flex-direction: column;
+    }
+
+    .flex-child, .fc {
+        flex:1;
+        &.center-self {
+            align-self: center;
+        }
+    }
+
+    &.content-center {
+        justify-content: center;
+    }
+
+    .flex-card {
+        display: flex;
+        flex: 1;
+
+        &.content {
+            flex: 1;
+        }
+
+    }
+}

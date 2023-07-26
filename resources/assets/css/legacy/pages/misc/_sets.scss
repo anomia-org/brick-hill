@@ -1,0 +1,15 @@
+.grid .col-1-4.set {
+    padding-left: 10px;
+    padding-right: 10px;
+    
+    .thumbnail img {
+        max-height: 144px;
+    }
+}
+
+.card {
+    .game-name {
+        height: 25px;
+        display: block;
+    }
+}

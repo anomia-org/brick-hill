@@ -1,0 +1,1089 @@
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+DROP TABLE IF EXISTS `activity_logs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `activity_logs` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `users` int(10) unsigned NOT NULL,
+  `online` int(10) unsigned NOT NULL,
+  `active_subscriptions` int(10) unsigned NOT NULL,
+  `active_memberships` int(10) unsigned NOT NULL,
+  `posts` int(10) unsigned NOT NULL,
+  `bits` int(10) unsigned NOT NULL,
+  `funds` decimal(13,2) unsigned NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `admin_logs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `admin_logs` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) unsigned NOT NULL,
+  `action` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `post_data` json NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `admin_logs_user_id_foreign` (`user_id`),
+  CONSTRAINT `admin_logs_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `asset_types`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `asset_types` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `asset_types_type_unique` (`type`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `assets`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `assets` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `assetable_id` bigint(20) unsigned DEFAULT NULL,
+  `assetable_type` int(10) unsigned DEFAULT NULL,
+  `asset_type_id` int(10) unsigned NOT NULL,
+  `is_approved` tinyint(1) NOT NULL DEFAULT '0',
+  `is_pending` tinyint(1) NOT NULL DEFAULT '1',
+  `uuid` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `assets_asset_type_id_foreign` (`asset_type_id`),
+  CONSTRAINT `assets_asset_type_id_foreign` FOREIGN KEY (`asset_type_id`) REFERENCES `asset_types` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `avatars`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `avatars` (
+  `user_id` bigint(20) unsigned NOT NULL,
+  `items` json NOT NULL,
+  `variations` json NOT NULL,
+  `colors` json NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`user_id`),
+  CONSTRAINT `avatars_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `award_types`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `award_types` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `awards`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `awards` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) unsigned NOT NULL,
+  `award_id` bigint(20) unsigned NOT NULL,
+  `own` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  KEY `awards_award_id_foreign` (`award_id`),
+  KEY `awards_user_id_foreign` (`user_id`),
+  CONSTRAINT `awards_award_id_foreign` FOREIGN KEY (`award_id`) REFERENCES `award_types` (`id`),
+  CONSTRAINT `awards_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `ban_types`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ban_types` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `default_note` text COLLATE utf8mb4_unicode_ci,
+  `default_length` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `ban_types_type_unique` (`type`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `bans`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bans` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) unsigned NOT NULL,
+  `admin_id` bigint(20) unsigned NOT NULL,
+  `note` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `content` text COLLATE utf8mb4_unicode_ci,
+  `ban_type_id` bigint(20) unsigned DEFAULT NULL,
+  `length` int(11) NOT NULL,
+  `active` tinyint(1) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `bans_admin_id_foreign` (`admin_id`),
+  KEY `bans_ban_type_id_foreign` (`ban_type_id`),
+  KEY `bans_user_id_foreign` (`user_id`),
+  KEY `bans_active_index` (`active`),
+  CONSTRAINT `bans_admin_id_foreign` FOREIGN KEY (`admin_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `bans_ban_type_id_foreign` FOREIGN KEY (`ban_type_id`) REFERENCES `ban_types` (`id`),
+  CONSTRAINT `bans_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `billing_products`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `billing_products` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `bucks_amount` int(11) NOT NULL,
+  `membership` bigint(20) unsigned DEFAULT NULL,
+  `membership_length` int(11) DEFAULT NULL,
+  `stripe_plan_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `paypal_plan_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `price` decimal(5,2) NOT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  KEY `billing_products_membership_foreign` (`membership`),
+  CONSTRAINT `billing_products_membership_foreign` FOREIGN KEY (`membership`) REFERENCES `membership_values` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `buy_requests`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `buy_requests` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) unsigned NOT NULL,
+  `item_id` bigint(20) unsigned NOT NULL,
+  `bucks` int(10) unsigned NOT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '1',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `buy_requests_item_id_foreign` (`item_id`),
+  KEY `buy_requests_user_id_foreign` (`user_id`),
+  CONSTRAINT `buy_requests_item_id_foreign` FOREIGN KEY (`item_id`) REFERENCES `items` (`id`),
+  CONSTRAINT `buy_requests_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `clan_members`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `clan_members` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `clan_id` bigint(20) unsigned NOT NULL,
+  `user_id` bigint(20) unsigned NOT NULL,
+  `rank` int(11) NOT NULL,
+  `status` enum('accepted','declined','pending') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `clan_members_clan_id_foreign` (`clan_id`),
+  KEY `clan_members_user_id_foreign` (`user_id`),
+  CONSTRAINT `clan_members_clan_id_foreign` FOREIGN KEY (`clan_id`) REFERENCES `clans` (`id`),
+  CONSTRAINT `clan_members_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `clan_ranks`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `clan_ranks` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `clan_id` bigint(20) unsigned NOT NULL,
+  `rank_id` int(11) NOT NULL,
+  `name` varchar(42) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `perm_postWall` tinyint(1) NOT NULL DEFAULT '0',
+  `perm_modWall` tinyint(1) NOT NULL DEFAULT '0',
+  `perm_inviteDecline` tinyint(1) NOT NULL DEFAULT '0',
+  `perm_allyEnemy` tinyint(1) NOT NULL DEFAULT '0',
+  `perm_changeRank` tinyint(1) NOT NULL DEFAULT '0',
+  `perm_addDelRank` tinyint(1) NOT NULL DEFAULT '0',
+  `perm_editDesc` tinyint(1) NOT NULL DEFAULT '0',
+  `perm_shoutBox` tinyint(1) NOT NULL DEFAULT '0',
+  `perm_addFunds` tinyint(1) NOT NULL DEFAULT '0',
+  `perm_takeFunds` tinyint(1) NOT NULL DEFAULT '0',
+  `perm_editClan` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `clan_ranks_clan_id_foreign` (`clan_id`),
+  CONSTRAINT `clan_ranks_clan_id_foreign` FOREIGN KEY (`clan_id`) REFERENCES `clans` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `clan_relations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `clan_relations` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `from_clan` bigint(20) unsigned NOT NULL,
+  `to_clan` bigint(20) unsigned NOT NULL,
+  `relation` enum('ally','enemy') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` enum('accepted','declined','pending') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `clan_relations_from_clan_foreign` (`from_clan`),
+  KEY `clan_relations_to_clan_foreign` (`to_clan`),
+  CONSTRAINT `clan_relations_from_clan_foreign` FOREIGN KEY (`from_clan`) REFERENCES `clans` (`id`),
+  CONSTRAINT `clan_relations_to_clan_foreign` FOREIGN KEY (`to_clan`) REFERENCES `clans` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `clans`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `clans` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `owner_id` bigint(20) unsigned NOT NULL,
+  `tag` varchar(5) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `funds` int(11) NOT NULL,
+  `type` enum('open','trial','private','locked') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'open',
+  `ownership` enum('clan','user','none') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `approved` enum('yes','pending','no') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending',
+  `clan_hash` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `clans_approved_index` (`approved`),
+  KEY `clans_owner_id_foreign` (`owner_id`),
+  CONSTRAINT `clans_owner_id_foreign` FOREIGN KEY (`owner_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `comments`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `comments` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `author_id` bigint(20) unsigned NOT NULL,
+  `commentable_id` bigint(20) unsigned NOT NULL,
+  `commentable_type` int(10) unsigned NOT NULL,
+  `comment` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `scrubbed` tinyint(1) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `comments_author_id_foreign` (`author_id`),
+  KEY `comments_commentable_id_commentable_type_index` (`commentable_id`,`commentable_type`),
+  CONSTRAINT `comments_author_id_foreign` FOREIGN KEY (`author_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `crate`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `crate` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) unsigned NOT NULL,
+  `item_id` bigint(20) unsigned NOT NULL,
+  `serial` int(11) NOT NULL,
+  `own` tinyint(1) NOT NULL DEFAULT '1',
+  `created_at` timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+  `updated_at` timestamp(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3),
+  PRIMARY KEY (`id`),
+  KEY `crate_item_id_foreign` (`item_id`),
+  KEY `crate_user_id_foreign` (`user_id`),
+  CONSTRAINT `crate_item_id_foreign` FOREIGN KEY (`item_id`) REFERENCES `items` (`id`),
+  CONSTRAINT `crate_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `disabled_accounts`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `disabled_accounts` (
+  `user_id` bigint(20) unsigned NOT NULL,
+  `type` tinyint(4) NOT NULL DEFAULT '0',
+  KEY `disabled_accounts_user_id_foreign` (`user_id`),
+  CONSTRAINT `disabled_accounts_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `email_blacklist`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `email_blacklist` (
+  `domain` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`domain`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `emails`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `emails` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) unsigned NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `verify_code` varchar(60) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `verified` tinyint(1) NOT NULL DEFAULT '0',
+  `revert_code` varchar(60) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `last_resend` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `emails_user_id_foreign` (`user_id`),
+  CONSTRAINT `emails_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `event_progresses`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `event_progresses` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) unsigned NOT NULL,
+  `event_id` int(10) unsigned NOT NULL,
+  `stage` int(10) unsigned NOT NULL DEFAULT '1',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `event_progresses_user_id_foreign` (`user_id`),
+  CONSTRAINT `event_progresses_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `favorites`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `favorites` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) unsigned NOT NULL,
+  `favoriteable_id` bigint(20) unsigned NOT NULL,
+  `favoriteable_type` int(10) unsigned NOT NULL,
+  `active` tinyint(1) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `item_favorites_user_id_foreign` (`user_id`),
+  KEY `favorites_favoriteable_id_favoriteable_type_index` (`favoriteable_id`,`favoriteable_type`),
+  CONSTRAINT `item_favorites_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `forum_boards`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `forum_boards` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(128) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `category_id` bigint(20) unsigned DEFAULT NULL,
+  `power` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `forum_boards_category_id_foreign` (`category_id`),
+  CONSTRAINT `forum_boards_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `forum_categories` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `forum_bookmarks`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `forum_bookmarks` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) unsigned NOT NULL,
+  `thread_id` bigint(20) unsigned NOT NULL,
+  `seen` tinyint(1) NOT NULL,
+  `active` tinyint(1) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `forum_bookmarks_thread_id_foreign` (`thread_id`),
+  KEY `forum_bookmarks_user_id_foreign` (`user_id`),
+  CONSTRAINT `forum_bookmarks_thread_id_foreign` FOREIGN KEY (`thread_id`) REFERENCES `forum_threads` (`id`),
+  CONSTRAINT `forum_bookmarks_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `forum_categories`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `forum_categories` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `order` int(11) NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `color` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `forum_drafts`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `forum_drafts` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) unsigned NOT NULL,
+  `board_id` bigint(20) unsigned DEFAULT NULL,
+  `title` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `body` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `deleted` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `forum_drafts_board_id_foreign` (`board_id`),
+  KEY `forum_drafts_user_id_foreign` (`user_id`),
+  CONSTRAINT `forum_drafts_board_id_foreign` FOREIGN KEY (`board_id`) REFERENCES `forum_boards` (`id`),
+  CONSTRAINT `forum_drafts_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `forum_posts`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `forum_posts` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `author_id` bigint(20) unsigned NOT NULL,
+  `thread_id` bigint(20) unsigned NOT NULL,
+  `body` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `scrubbed` tinyint(1) NOT NULL DEFAULT '0',
+  `quote_id` int(11) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `forum_posts_author_id_foreign` (`author_id`),
+  KEY `forum_posts_thread_id_foreign` (`thread_id`),
+  CONSTRAINT `forum_posts_author_id_foreign` FOREIGN KEY (`author_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `forum_posts_thread_id_foreign` FOREIGN KEY (`thread_id`) REFERENCES `forum_threads` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `forum_threads`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `forum_threads` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `author_id` bigint(20) unsigned NOT NULL,
+  `board_id` bigint(20) unsigned NOT NULL,
+  `title` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `body` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `views` int(11) NOT NULL DEFAULT '0',
+  `locked` tinyint(1) NOT NULL DEFAULT '0',
+  `pinned` tinyint(1) NOT NULL DEFAULT '0',
+  `deleted` tinyint(1) NOT NULL DEFAULT '0',
+  `hidden` tinyint(1) NOT NULL DEFAULT '0',
+  `scrubbed` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `forum_threads_board_id_index` (`board_id`),
+  KEY `forum_threads_board_id_pinned_updated_at_index` (`board_id`,`pinned`,`updated_at`),
+  KEY `forum_threads_author_id_foreign` (`author_id`),
+  CONSTRAINT `forum_threads_author_id_foreign` FOREIGN KEY (`author_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `forum_threads_board_id_foreign` FOREIGN KEY (`board_id`) REFERENCES `forum_boards` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `friends`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `friends` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `from_id` bigint(20) unsigned NOT NULL,
+  `to_id` bigint(20) unsigned NOT NULL,
+  `is_pending` tinyint(1) NOT NULL DEFAULT '1',
+  `is_accepted` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `friends_to_id_is_pending_index` (`to_id`,`is_pending`),
+  KEY `friends_from_id_foreign` (`from_id`),
+  KEY `friends_to_id_foreign` (`to_id`),
+  CONSTRAINT `friends_from_id_foreign` FOREIGN KEY (`from_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `friends_to_id_foreign` FOREIGN KEY (`to_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `game_tokens`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `game_tokens` (
+  `token` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` bigint(20) unsigned NOT NULL,
+  `ip` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `host_id` int(10) unsigned DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`token`),
+  KEY `game_tokens_user_id_foreign` (`user_id`),
+  CONSTRAINT `game_tokens_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `invalid_emails`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `invalid_emails` (
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `ip_addresses`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `ip_addresses` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) unsigned NOT NULL,
+  `ip` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `ip_addresses_ip_user_id_index` (`ip`,`user_id`),
+  KEY `ip_addresses_user_id_foreign` (`user_id`),
+  CONSTRAINT `ip_addresses_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `item_types`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `item_types` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `item_types_type_unique` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `items`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `items` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `creator_id` bigint(20) unsigned NOT NULL,
+  `name` varchar(52) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci,
+  `type_id` int(10) unsigned NOT NULL,
+  `timer` tinyint(1) NOT NULL,
+  `timer_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `special` tinyint(1) NOT NULL DEFAULT '0',
+  `special_edition` tinyint(1) NOT NULL DEFAULT '0',
+  `special_q` int(11) NOT NULL DEFAULT '0',
+  `average_price` int(10) unsigned DEFAULT NULL,
+  `is_pending` tinyint(1) NOT NULL DEFAULT '1',
+  `is_approved` tinyint(1) NOT NULL DEFAULT '0',
+  `goes_with` int(11) NOT NULL DEFAULT '0',
+  `img_uuid` char(36) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `file_uuid` char(36) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `items_is_pending_index` (`is_pending`),
+  KEY `items_creator_id_foreign` (`creator_id`),
+  KEY `items_updated_at_index` (`updated_at`),
+  KEY `items_type_id_foreign` (`type_id`),
+  CONSTRAINT `items_creator_id_foreign` FOREIGN KEY (`creator_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `items_type_id_foreign` FOREIGN KEY (`type_id`) REFERENCES `item_types` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `lottery_winners`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `lottery_winners` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) unsigned NOT NULL,
+  `amount_won` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `lottery_winners_user_id_foreign` (`user_id`),
+  CONSTRAINT `lottery_winners_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `membership_values`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `membership_values` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `daily_bucks` int(11) NOT NULL,
+  `sets` int(11) NOT NULL,
+  `items` int(11) NOT NULL,
+  `create_clans` int(11) NOT NULL,
+  `join_clans` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `memberships`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `memberships` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) unsigned NOT NULL,
+  `membership` bigint(20) unsigned NOT NULL,
+  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `length` int(11) NOT NULL,
+  `active` tinyint(1) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `memberships_membership_foreign` (`membership`),
+  KEY `memberships_user_id_foreign` (`user_id`),
+  CONSTRAINT `memberships_membership_foreign` FOREIGN KEY (`membership`) REFERENCES `membership_values` (`id`),
+  CONSTRAINT `memberships_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `messages`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `messages` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `author_id` bigint(20) unsigned NOT NULL,
+  `recipient_id` bigint(20) unsigned NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `message` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `read` tinyint(1) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `messages_recipient_id_read_index` (`recipient_id`,`read`),
+  KEY `messages_author_id_foreign` (`author_id`),
+  CONSTRAINT `messages_author_id_foreign` FOREIGN KEY (`author_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `messages_recipient_id_foreign` FOREIGN KEY (`recipient_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `migrations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `migrations` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `model_has_permissions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `model_has_permissions` (
+  `permission_id` bigint(20) unsigned NOT NULL,
+  `model_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `model_id` bigint(20) unsigned NOT NULL,
+  PRIMARY KEY (`permission_id`,`model_id`,`model_type`),
+  KEY `model_has_permissions_model_id_model_type_index` (`model_id`,`model_type`),
+  CONSTRAINT `model_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `model_has_roles`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `model_has_roles` (
+  `role_id` bigint(20) unsigned NOT NULL,
+  `model_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `model_id` bigint(20) unsigned NOT NULL,
+  PRIMARY KEY (`role_id`,`model_id`,`model_type`),
+  KEY `model_has_roles_model_id_model_type_index` (`model_id`,`model_type`),
+  CONSTRAINT `model_has_roles_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `oauth_access_tokens`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `oauth_access_tokens` (
+  `id` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` bigint(20) unsigned DEFAULT NULL,
+  `client_id` bigint(20) unsigned NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `scopes` text COLLATE utf8mb4_unicode_ci,
+  `revoked` tinyint(1) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `expires_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `oauth_access_tokens_user_id_index` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `oauth_auth_codes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `oauth_auth_codes` (
+  `id` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` bigint(20) unsigned NOT NULL,
+  `client_id` bigint(20) unsigned NOT NULL,
+  `scopes` text COLLATE utf8mb4_unicode_ci,
+  `revoked` tinyint(1) NOT NULL,
+  `expires_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `oauth_auth_codes_user_id_index` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `oauth_clients`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `oauth_clients` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) unsigned DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `secret` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `provider` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `redirect` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `personal_access_client` tinyint(1) NOT NULL,
+  `password_client` tinyint(1) NOT NULL,
+  `revoked` tinyint(1) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `oauth_clients_user_id_index` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `oauth_personal_access_clients`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `oauth_personal_access_clients` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `client_id` bigint(20) unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `oauth_refresh_tokens`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `oauth_refresh_tokens` (
+  `id` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `access_token_id` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `revoked` tinyint(1) NOT NULL,
+  `expires_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `oauth_refresh_tokens_access_token_id_index` (`access_token_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `outfits`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `outfits` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) unsigned NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `items` json NOT NULL,
+  `variations` json NOT NULL,
+  `colors` json NOT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '1',
+  `uuid` char(36) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `outfits_user_id_foreign` (`user_id`),
+  CONSTRAINT `outfits_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `password_resets`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `password_resets` (
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  KEY `password_resets_email_index` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `past_usernames`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `past_usernames` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) unsigned NOT NULL,
+  `old_username` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `new_username` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `hidden` tinyint(1) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `past_usernames_user_id_foreign` (`user_id`),
+  CONSTRAINT `past_usernames_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `payments`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `payments` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) unsigned NOT NULL,
+  `gross` decimal(5,2) NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `receipt` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `product` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `billing_product_id` bigint(20) unsigned DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `payments_product_id_foreign` (`billing_product_id`),
+  KEY `payments_user_id_foreign` (`user_id`),
+  CONSTRAINT `payments_product_id_foreign` FOREIGN KEY (`billing_product_id`) REFERENCES `billing_products` (`id`),
+  CONSTRAINT `payments_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `permissions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `permissions` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `guard_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `products`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `products` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `productable_id` bigint(20) unsigned NOT NULL,
+  `productable_type` int(10) unsigned NOT NULL,
+  `bits` int(10) unsigned DEFAULT NULL,
+  `bucks` int(10) unsigned DEFAULT NULL,
+  `offsale` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `products_productable_id_productable_type_index` (`productable_id`,`productable_type`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `purchases`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `purchases` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) unsigned NOT NULL,
+  `seller_id` bigint(20) unsigned NOT NULL,
+  `product_id` bigint(20) unsigned NOT NULL,
+  `price` int(11) NOT NULL,
+  `pay_id` tinyint(4) DEFAULT '1',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `purchases_seller_id_foreign` (`seller_id`),
+  KEY `purchases_user_id_foreign` (`user_id`),
+  KEY `purchases_product_id_foreign` (`product_id`),
+  CONSTRAINT `purchases_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`),
+  CONSTRAINT `purchases_seller_id_foreign` FOREIGN KEY (`seller_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `purchases_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `report_reasons`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `report_reasons` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `reason` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `report_reasons_reason_unique` (`reason`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `reports`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `reports` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) unsigned NOT NULL,
+  `reportable_type` int(10) unsigned NOT NULL,
+  `report_reason_type_id` bigint(20) unsigned NOT NULL,
+  `reportable_id` bigint(20) unsigned NOT NULL,
+  `report_note` text COLLATE utf8mb4_unicode_ci,
+  `seen` tinyint(1) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `reports_report_type_id_foreign` (`reportable_type`),
+  KEY `reports_seen_index` (`seen`),
+  KEY `reports_report_reason_type_id_foreign` (`report_reason_type_id`),
+  KEY `reports_user_id_foreign` (`user_id`),
+  CONSTRAINT `reports_report_reason_type_id_foreign` FOREIGN KEY (`report_reason_type_id`) REFERENCES `report_reasons` (`id`),
+  CONSTRAINT `reports_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `role_has_permissions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `role_has_permissions` (
+  `permission_id` bigint(20) unsigned NOT NULL,
+  `role_id` bigint(20) unsigned NOT NULL,
+  PRIMARY KEY (`permission_id`,`role_id`),
+  KEY `role_has_permissions_role_id_foreign` (`role_id`),
+  CONSTRAINT `role_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`),
+  CONSTRAINT `role_has_permissions_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `roles`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `roles` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `guard_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `servers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `servers` (
+  `set_id` bigint(20) unsigned NOT NULL,
+  `ip_address` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `port` int(10) unsigned NOT NULL,
+  `players` int(10) unsigned NOT NULL,
+  `last_post` datetime NOT NULL,
+  PRIMARY KEY (`set_id`),
+  CONSTRAINT `servers_set_id_foreign` FOREIGN KEY (`set_id`) REFERENCES `sets` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `sets`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `sets` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `creator_id` bigint(20) unsigned NOT NULL,
+  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(1000) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `playing` int(11) NOT NULL DEFAULT '0',
+  `visits` int(11) NOT NULL DEFAULT '0',
+  `address` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '127.0.0.1',
+  `uid` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `sets_creator_id_foreign` (`creator_id`),
+  CONSTRAINT `sets_creator_id_foreign` FOREIGN KEY (`creator_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `special_sellers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `special_sellers` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) unsigned NOT NULL,
+  `crate_id` bigint(20) unsigned NOT NULL,
+  `item_id` bigint(20) unsigned NOT NULL,
+  `bucks` int(11) NOT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `special_sellers_item_id_index` (`item_id`),
+  KEY `special_sellers_crate_id_foreign` (`crate_id`),
+  KEY `special_sellers_user_id_foreign` (`user_id`),
+  CONSTRAINT `special_sellers_crate_id_foreign` FOREIGN KEY (`crate_id`) REFERENCES `crate` (`id`),
+  CONSTRAINT `special_sellers_item_id_foreign` FOREIGN KEY (`item_id`) REFERENCES `items` (`id`),
+  CONSTRAINT `special_sellers_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `statuses`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `statuses` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `clan_id` bigint(20) unsigned DEFAULT NULL,
+  `owner_id` bigint(20) unsigned NOT NULL,
+  `body` varchar(124) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `scrubbed` tinyint(1) NOT NULL DEFAULT '0',
+  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `statuses_clan_id_foreign` (`clan_id`),
+  KEY `statuses_owner_id_foreign` (`owner_id`),
+  CONSTRAINT `statuses_clan_id_foreign` FOREIGN KEY (`clan_id`) REFERENCES `clans` (`id`),
+  CONSTRAINT `statuses_owner_id_foreign` FOREIGN KEY (`owner_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `stripe_customers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `stripe_customers` (
+  `user_id` bigint(20) unsigned NOT NULL,
+  `stripe_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`user_id`),
+  KEY `stripe_payments_stripe_id_index` (`stripe_id`),
+  CONSTRAINT `stripe_customers_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `subscriptions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `subscriptions` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint(20) unsigned NOT NULL,
+  `sub_profile_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `expected_bill` datetime NOT NULL,
+  `product` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `active` tinyint(1) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `subscriptions_user_id_foreign` (`user_id`),
+  CONSTRAINT `subscriptions_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `tfa_recovery_codes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tfa_recovery_codes` (
+  `user_id` bigint(20) unsigned NOT NULL,
+  `codes` json NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`user_id`),
+  CONSTRAINT `tfa_recovery_codes_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `trades`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `trades` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `sender_id` bigint(20) unsigned NOT NULL,
+  `receiver_id` bigint(20) unsigned NOT NULL,
+  `sender_item_ids` json DEFAULT NULL,
+  `receiver_item_ids` json DEFAULT NULL,
+  `sender_bucks` int(11) NOT NULL DEFAULT '0',
+  `receiver_bucks` int(11) NOT NULL DEFAULT '0',
+  `is_accepted` tinyint(1) NOT NULL DEFAULT '0',
+  `is_pending` tinyint(1) NOT NULL DEFAULT '1',
+  `is_cancelled` tinyint(1) NOT NULL DEFAULT '0',
+  `has_errored` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `trades_receiver_id_foreign` (`receiver_id`),
+  KEY `trades_sender_id_foreign` (`sender_id`),
+  KEY `trades_receiver_id_is_pending_updated_at_index` (`receiver_id`,`is_pending`,`updated_at`),
+  KEY `trades_sender_id_is_pending_updated_at_index` (`sender_id`,`is_pending`,`updated_at`),
+  KEY `trades_receiver_id_sender_id_is_pending_updated_at_index` (`receiver_id`,`sender_id`,`is_pending`,`updated_at`),
+  CONSTRAINT `trades_receiver_id_foreign` FOREIGN KEY (`receiver_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `trades_sender_id_foreign` FOREIGN KEY (`sender_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `secret_2fa` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci,
+  `desc_scrubbed` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `last_online` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `daily_bits` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `bucks` int(11) NOT NULL DEFAULT '1',
+  `bits` int(11) NOT NULL DEFAULT '10',
+  `primary_clan_id` bigint(20) unsigned DEFAULT NULL,
+  `playing` int(11) NOT NULL DEFAULT '-1',
+  `last_played` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `avatar_hash` char(36) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '(DC2Type:guid)',
+  `theme` int(10) unsigned NOT NULL DEFAULT '1',
+  `birth` date NOT NULL,
+  `gender` tinyint(1) DEFAULT NULL,
+  `power` int(10) unsigned NOT NULL DEFAULT '0',
+  `admin_points` int(10) unsigned NOT NULL DEFAULT '0',
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_username_unique` (`username`),
+  KEY `users_power_index` (`power`),
+  KEY `users_primary_clan_id_foreign` (`primary_clan_id`),
+  CONSTRAINT `users_primary_clan_id_foreign` FOREIGN KEY (`primary_clan_id`) REFERENCES `clans` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+

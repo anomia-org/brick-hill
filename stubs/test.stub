@@ -1,0 +1,25 @@
+<?php
+
+namespace {{ namespace }};
+
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
+
+class {{ class }} extends TestCase
+{
+    use RefreshDatabase;
+
+    protected bool $seed = true;
+
+    /**
+     * A basic feature test example.
+     *
+     * @return void
+     */
+    public function test_example()
+    {
+        $response = $this->get($this->addDomain('', 'www'));
+
+        $response->assertStatus(200);
+    }
+}

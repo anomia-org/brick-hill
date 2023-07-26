@@ -1,0 +1,23 @@
+.fieldset {
+    border: $fieldset-border solid map-get(map-get($fieldset-themes, 'default'), 'color');
+    border-radius: $fieldset-border-radius;
+
+    legend {
+        font-size: .9rem;
+        text-transform: capitalize;
+        color: map-get(map-get($fieldset-themes, 'default'), 'color');
+        font-weight: 600;
+    }
+
+    @each $class, $props in $fieldset-themes {
+        @if($class != "default") {
+            // check for border color later
+            &.#{$class} {
+                border-color: map-get($props, 'color');
+                legend {
+                    color: map-get($props, 'color');
+                }
+            }
+        }
+    }
+}

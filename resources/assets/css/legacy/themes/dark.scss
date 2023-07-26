@@ -1,0 +1,345 @@
+/*
+Format themes like so:
+Name
+Brief Description
+Creator
+
+Default Theme
+This is the default theme 'nuff said
+~Mikuchan03 owo
+*/
+
+/********
+    Colors
+********/
+// Base
+$background-color: #242426;
+$text-color: #fff;
+
+// Text
+$white: #fff; // White Standard
+$white-input: #CBCBCB;
+$white-header: #7B8183;
+$light-white: #9E9E9E;// Comment/Light
+$gray: #d2d2d2; // Timestamps/Config
+$dark-gray: #c4c4c4;
+$alternate-grey: #dfdfdf; //creator color
+$darkest-gray: #d4d4d4; //forum bar black
+$ablack: #d2d2d2; //almost black
+$black: #fff;
+
+$forumbargray: #bababa; // forum arrows
+
+$blue: #196fb5;// blue standard
+$green: #2fb621;
+$red: #ce1b1b;
+$orange: #cebc18;
+
+$dark-red: #c60000;
+
+$favorite: #fcc100;
+$special: #FFD52D;
+
+// Fieldset
+$fieldset-border: 2px;
+$fieldset-border-radius: 3px;
+
+$fieldset-themes: (
+    'default': (
+        'color': #999
+    ),
+    'red': (
+        'color': #fe5746
+    ),
+    'green': (
+        'color': #7cdc83
+    )
+);
+
+// Currency
+$bits: #F49B00;
+$bucks: #009624;
+$free: #0F7BFF;
+$offsale: #cacaca;
+
+// Labels
+$label: #e6e6e6;
+
+// Forum Tag
+$forum-tag-bg: #303133;
+$forum-tag-color: $white;
+
+// Navbar
+// define a different font color by using hover-color key
+$nav: (
+    'primary': (
+        'background': #212020,
+        'border-hover': #fff,
+        'color': $white,
+        'font-size': 1.1em,
+        'padding-top': 6px
+    ),
+    'secondary': (
+        'background': #2e2f32,
+        'border-hover': #fff,
+        'color': #d6e5ee,
+        'font-size': .9em
+    )
+);
+
+$nav-notif-bg: #c61400;
+$nav-notif-color: $white;
+
+$info-box-bg: #2e2f32;
+
+// Inputs
+$input-bg: #2f2f2f;
+$input-border: #232121;
+$input-placeholder: #a8a8a8;
+
+$input-group-button-bg: #134b7b;
+$input-group-button-border: #869eff;
+$input-group-button-color: #fff;
+
+$input-box-bg: #2f2c2c;
+$input-box-color: $white;
+$input-box-border: #232121;
+
+$textarea-color: #fff;
+
+// Select
+$select-color: $white;
+$select-background-color: #2f2f2f;
+$select-border-color: #232121;
+$select-border-radius: 3px;
+//Cards
+/*
+Schema:
+    color: font color
+    background: background color
+    border: border-color
+*/
+
+$card-colors: (
+    'default': (
+        color: #fff,
+        background: #3b3c40,
+        border: #2d2e31
+    ),
+    'green': (
+        color: #54a84a,
+        background: #0a5812,
+        border: #54a84a,
+    ),
+    'blue': (
+        color: #869eff,
+        background: #134b7b,
+        border: #869eff,
+    ), 
+    'red': (
+        color: #ff8686,
+        background: #9f1212,
+        border: #ff6161,
+    ), 
+    'orange': (
+        color: #e5c765,
+        background: #9f7e12,
+        border: #e5c765,
+    ) 
+);
+$card-bg: #343538;
+
+$thumbnail-bg: #233036;
+$thumbnail-bg-dark: #2d2e31;
+
+$item-content: #2f3033;
+
+$footer-bg: #2f2f2f;
+$footer-border: #212121;
+
+$card-border: #DCDCDC;
+
+$hover-card-viewed: #2e2f31;
+$hover-card-hover: #2c2d2f;
+
+$dropdown-bg: #343538;
+$dropdown-hover: #2c2d2f;
+
+// Clans
+$clan-logo-bg: #363638;
+// Forum
+$divider: #303133;
+
+// Modal
+$modal: rgba(0,0,0,0.4); //background of popup
+$modal-bg: #343538; //pop up background
+
+// Hover Cards (Awards, Clans)
+$hover-color: #1d272c;
+
+// Shop
+$owns: #4CB04C;
+
+// Games
+$playing: #af1111;
+
+// Buttons
+$button-colors: (
+    'default': (
+        color: #fff,
+        background: #d0d0d0,
+        border: #adadad
+    ),
+    'blue': (
+        color: #fff,
+        background: #134b7b,
+        border: #869eff,
+    ),
+    'green': (
+        color: #fff,
+        background: #0a5812,
+        border: #54a84a,
+    ),
+    'red': (
+        color: #fff,
+        background: #9f1212,
+        border: #ff6161,
+    ),
+    'orange': (
+        color: #fff,
+        background: #9f7e12,
+        border: #e5c765,
+    ),
+    'hgreen': (
+        color: #54a84a,
+        background: #0a5812,
+        border: #54a84a,
+    ),
+    'hblue': (
+        color: #869eff,
+        background: #134b7b,
+        border: #869eff,
+    ),
+    'hred': (
+        color: #ff8686,
+        background: #9f1212,
+        border: #ff6161,
+    ),
+    'horange': (
+        color: #e5c765,
+        background: #9f7e12,
+        border: #e5c765,
+    ),
+    'bits': (
+        color: #fff,
+        background: $bits,
+        border: $bits
+    ),
+    'bucks': (
+        color: #fff,
+        background: $bucks,
+        border: $bucks
+    ),
+    'free': (
+        color: #fff,
+        background: #6fb6db,
+        border: #419dda
+    ),
+);
+
+// Boxes
+$box-border: #27282b;
+$box-shaded: #2f3033;
+
+// Alerts
+$alert-colors: (
+    'success': #23d160,
+    'error': #ef263d,
+    'warning': #ef9526
+);
+
+$alert-color: #fff;
+
+// Tabs
+$tab-bg: #2c2d2f;
+$tab-bg-active: #343538;
+$tab-border: #2f3033;
+$tab-color: #fff;
+$tab-body-bg: $card-bg;
+
+/********
+    Other
+********/
+
+$box-shadow: 0 2px 5px rgba(0,0,0,.2);
+
+$line-color: #303133; // hr
+
+$border-radius: 5px;
+
+// Tab Buttons
+$tab-button-spacing: 10px; // white space on the bottom
+$tab-button-hover: rgba(0,0,0,0.1); //background on hover
+$tab-button-transparent-bg: rgba(0,0,0,0); // background color on unactive button
+$tab-button-transparent-color: $white; // color on an unactive button
+
+// Vertical Tabs
+$vertical-tabs-radius: $border-radius;
+$vertical-tabs-padding: 10px;
+$vertical-tabs-border-x: 4px;
+$vertical-tabs-border: $red;
+$vertical-tabs-hover: #2c2d2f;
+$vertical-tabs-active: #2c2d2f;
+$vertical-tabs-themes: (
+
+);
+
+// Status Dots
+$offline: #a2a2a2;
+$online: #00ab00;
+// Pagintation
+$pagintation-padding: 5px;
+$pagintation-spacing: 5px;
+$pagintation-default: #b8b8b8;
+$pagintation-active: #196fb5;
+$pagintation-thickness: 600;
+
+// Blockquotes
+$blockquote-default: #eee;
+$blockquote-themes: (
+    'red': #af1111,
+    'green': #1d6918,
+    'blue': #1c4788,
+    'orange': #cab124
+);
+
+// Text Colors map (these will become classes)
+
+$text-colors: (
+    'bits': $bits,
+    'bucks': $bucks,
+    'free': $free,
+    'offsale': $offsale,
+
+    'red': $red,
+    'blue': $blue,
+    'green': $green,
+
+    'white': $white,
+    'light-gray': $light-white,
+    'gray': $gray,
+    'agray': $alternate-grey,
+    'dark-gray': $dark-gray,
+    'darkest-gray': $darkest-gray, //forum black
+    'ablack': $ablack,
+
+    'select-color': $select-color,
+
+    'black': $black,
+
+    'favorite': #fcc100
+);
+
+@import "../imports.scss";
+	
+	

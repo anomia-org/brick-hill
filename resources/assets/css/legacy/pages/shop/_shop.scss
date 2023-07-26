@@ -1,0 +1,128 @@
+.shop-categories {
+    display: flex;
+
+    .category {
+        flex: 1;
+        color: $gray;
+        text-align: center;
+    }
+
+    .category a:hover, .category.active {
+        font-weight: 600;
+        color: $alternate-grey;
+        cursor: pointer;
+    }
+}
+
+.card {
+    .item-creator {
+        overflow: hidden;
+        color: $alternate-grey;
+        font-size: .9em;
+    }
+}
+
+.item-page {
+    position: relative;
+}
+
+.comment {
+    overflow: hidden;
+    position: relative;
+
+    .user-link {
+        position:relative;
+    }
+
+    img {
+        width: 100%;
+        max-width: 150px;
+    }
+
+    .comment-holder {
+        white-space: normal;
+    }
+}
+
+.card {
+    .item-card-details, .item-content {
+        font-weight: 500;
+        background-color: $item-content;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        border-top: 1px solid $divider;
+        padding: 10px;
+        max-height: 81px;
+
+        & .price {
+            overflow: hidden;
+            padding-top: 4px;
+            color: #515151;
+        }
+    }
+}
+
+@media handheld, only screen and (max-width: 767px) {
+    .shop-categories {
+        overflow-x: scroll;
+
+        .category {
+            flex: none;
+            font-size: 14px;
+            display: inline-block;
+            padding-right: 15px;
+            padding-bottom: 10px;
+        }
+    }
+}
+
+@media handheld, only screen and (min-width: 767px) {
+    .shop-bar {
+        height: 110px;
+
+        .card {
+            height: 100px;
+        }
+    }
+}
+
+.sellers {
+    & .seller {
+        position: relative;
+    }
+
+    & .seller .owner {
+        img {
+            width: 100px;
+            display: inline-block;
+        }
+    }
+
+    & .price {
+        right: 0;
+        position: absolute;
+        top: 45%;
+        transform: translateY(-50%);
+
+        .serial {
+            font-size: 0.8em;
+            color: $alternate-grey;
+            text-align: right;
+        }
+    }
+
+    & .seller:not(:last-child) {
+        padding-bottom: 5px;
+        margin-bottom:10px;
+        border-bottom: 1px solid $line-color;
+    }
+
+}
+
+.tabs .tab-holder .tab-body .recommended-item {
+    padding-left: 10px;
+    padding-right: 10px;
+
+    text-align: center;
+}

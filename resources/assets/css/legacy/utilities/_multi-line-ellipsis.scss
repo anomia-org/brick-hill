@@ -1,0 +1,11 @@
+// from https://codepen.io/sergeysemashko/pen/jFGJD
+@mixin multiline-ellipsis ($max-height, $lines: 2) {
+    overflow: hidden;
+    max-height: $max-height;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $lines;
+
+    text-overflow: -o-ellipsis-lastline;
+}

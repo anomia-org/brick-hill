@@ -1,0 +1,74 @@
+button, .button {
+    &:not(.plain) {
+        text-align: center;
+        padding: 10px 20px;
+        border-radius: $border-radius;
+        border: 1px solid;
+        display: inline-block;
+        text-transform: uppercase;
+        @include color-class( map-get($button-colors, 'default') );
+
+        &:not([disabled]) {
+            @include color-classes($button-colors);
+        } 
+    }
+
+    &[disabled] {
+        cursor: not-allowed !important;
+    }
+
+    &.plain {
+        border: 0;
+        font-size: 1em;
+        padding: 0;
+    }
+
+    &.no-click,
+    &.no-click[disabled] {
+        cursor: default;
+        color: #fff;
+        background-color: #d0d0d0;
+        border-color: #adadad;
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    &.no-cap {
+        text-transform: inherit;
+    }
+
+    &.flat {
+        border-color: transparent;
+    }
+
+    &.small {
+        padding: 5px 10px;
+    }
+
+    &.purchase {
+        font-size: 15px;
+        min-width: 100px;
+    }
+
+    &.tab-button {
+        font-weight: 600;
+        font-size: 17px;
+    }
+
+    &.tab-button.transparent {
+        background-color: $tab-button-transparent-bg;
+        border-color: $tab-button-transparent-bg;
+        color: $tab-button-transparent-color;
+
+        &:hover {
+            background-color: $tab-button-hover;
+        }
+    }
+
+}
+
+.tab-buttons {
+    margin-bottom: $tab-button-spacing;
+}

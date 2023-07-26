@@ -1,0 +1,86 @@
+.clan-img-holder {
+    border-radius: $border-radius;
+    background-color: $thumbnail-bg-dark;
+    width: 225px;
+    height: 225px;
+
+    img {
+        height: 100%;
+        width: 100%;
+    }
+}
+
+.clan-edit-ranks table h5 {
+    margin-bottom: 0px;
+    margin-top: 5px;
+}
+
+.edit-member .clan-member {
+    position: relative;
+    padding-bottom: 0;
+}
+
+.clan-member {
+    display: inline-block;
+    padding: 12px;
+    text-align: center;
+}
+
+.edit-member select {
+    width: 25%;
+    display: block;
+    min-width: 115px;
+    font-size: 14px;
+}
+
+.clan-relation .clan-name {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-left: 5px;
+    max-width: 145px
+}
+.clan-relation .clan-form {
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-65%);
+    margin-left: 150px
+}
+
+.slick-slide {
+    display: inline-block;
+}
+
+.carousel {
+    overflow: hidden;
+    position: relative
+}
+
+.carousel ul li {
+    display: inline-block
+}
+
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 3px;
+    padding: 5px;
+    transition: background-color .1s linear;
+    z-index: 999
+}
+
+.carousel-button:hover {
+    background-color: rgba(0,0,0,.1)
+}
+
+.carousel-button.left {
+    border-left: 0;
+    left: 0
+}
+
+.carousel-button.right {
+    border-right: 0;
+    right: 0
+}

@@ -1,0 +1,57 @@
+// Text Colors
+@each $class, $color in $text-colors {
+        .#{$class}-text {
+            color: $color;
+    }
+}
+
+.large-text {
+    font-size: 2em;
+}
+
+.medium-text {
+    font-size: 1.5rem;
+}
+
+.smedium-text {
+    font-size: 1.2rem;
+}
+
+.normal-text {
+    font-size: 1rem;
+}
+
+.small-text {
+    font-size: .9rem;
+}
+
+.smaller-text {
+    font-size: .8rem;
+}
+
+b {
+    font-weight: 600;
+}
+
+.bold {
+    font-weight: 600;
+}
+
+.very-bold {
+    font-weight: 700;
+}
+
+.cap-text {
+    text-transform: uppercase;
+}
+
+// pls use .text-center uwu
+// i just read this after i finished all the pages and i dont remember what i used
+.center-text, .text-center {
+    text-align:center;
+}
+
+.pointer,
+.hover-cursor:hover {
+    cursor: pointer;
+}

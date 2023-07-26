@@ -1,0 +1,160 @@
+.membership-holder {
+    .membership-header {
+        min-height: 128px;
+        position: relative;
+
+        &.ace {
+            background-color: #DC0F18;
+        }
+
+        &.royal {
+            background-color: #E08733;
+        }
+    }
+
+    .membership-icon {
+        transform: scale(2);
+        margin: 18px 0 0 18px;
+    }
+
+    .membership-text {
+        margin-left: 60px;
+        margin-top: 10px;
+        display: inline-block;
+    }
+
+    .membership-perks div {
+        padding-bottom: 5px;
+    }
+
+    .membership-bkg {
+        position: absolute;
+        right: 0;
+    }
+
+    .membership-items {
+        position: absolute;
+        right: 0;
+        height: 128px;
+    }
+}
+
+.membership-buttons {
+    padding: 10px;
+    border: 1px solid $input-box-border;
+    border-top: 0;
+    text-align:center;
+
+    .membership-button {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 100px;
+        padding-right: 0;
+        margin: 0 12px;
+        width: calc(33.3% - 30px);
+    
+        @media handheld, only screen and (max-width: 767px) {
+            width: 100%;
+            margin: 0 0 10px;
+        }
+
+        &.gray {
+            cursor: default;
+            background: linear-gradient(0deg, #636363 0%, #8b8b8b 100%);
+        }
+    
+        &.ace {
+            background: linear-gradient(0deg, #DC0F18 0%, #FE292B 100%);
+        }
+    
+        &.royal {
+            background: linear-gradient(0deg, #E08733 0%, #F4A244 100%);
+        }
+    
+        &.bucks {
+            background: linear-gradient(0deg, #00832C 0%, #00AD39 100%);
+        }
+    
+        .membership-average {
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            padding: 5px;
+
+            &.gray {
+                background-color: #535353;
+            }
+    
+            &.ace {
+                background-color: #A70D13;
+            }
+    
+            &.royal {
+                background-color: #A96626;
+            }
+        }
+    }
+
+    .membership-length {
+        position: absolute;
+        transform: translateY(-125%);
+    }
+
+    .membership-month {
+        margin: 5px 0 0 2px;
+    }
+
+    .bucks-amount {
+        position: absolute;
+        transform: translateY(-50%);
+    }
+
+    .bucks-price {
+        position: absolute;
+        transform: translateY(50%);
+    }
+}
+
+@media (max-width: 1100px) {
+    .membership-bkg,
+    .membership-items {
+        display: none;
+    }
+}
+
+.payment-form-simple {
+    margin-bottom: 10px;
+}
+
+.payment-form-options {
+    margin-top: -5px;
+
+    .payment-form-spacer {
+        margin-bottom: 10px;
+    
+        img {
+            position: relative;
+            top: 6px;
+            width: 40px;
+        }
+    }
+}
+
+.lottery-winners {
+    .lottery-winner {
+        max-width: 128px;
+        margin: 0 10px;
+    }
+
+    img {
+        width: 128px;
+    }
+}
+
+.lottery-button.plain {
+    padding: 15px 50px;
+    margin-top: 10px;
+    background: linear-gradient(0deg, #00832C 0%, #00AD39 100%);
+}

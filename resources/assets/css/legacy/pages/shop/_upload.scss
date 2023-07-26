@@ -1,0 +1,60 @@
+/*
+wow you snagged this from jefemy and didn't even bother to reformat it with sass you're so lazy!!
+yes, yes I am
+*/
+.file-img-box {
+    border: 1px solid #d9d9d9;
+    width: 156px;
+    height: 156px;
+    margin: auto;
+    margin-bottom: 10px
+}
+
+.file-img-box img {
+    height: 100%;
+    width: 100%;
+    box-sizing: content-box
+}
+
+.upload-preview-box img {
+    height: 100%;
+    margin: auto;
+    box-sizing: content-box
+}
+
+.upload-preview-box {
+    position: relative;
+    border: 1px solid #d9d9d9;
+    border-radius: 5px;
+    text-align: center;
+    padding: 5px;
+    height: 256px;
+    width: 256px;
+    margin: auto
+}
+
+#upload-file-img,#upload-file-model {
+    width: .1px;
+    height: .1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1
+}
+
+#upload-label {
+    cursor: pointer;
+    padding: 5px
+}
+
+.upload-label {
+    display: block;
+    margin-top: 5px;
+    text-align: left;
+    font-weight: 600
+}
+
+.upload-input {
+    margin-bottom: 10px;
+    display: block
+}

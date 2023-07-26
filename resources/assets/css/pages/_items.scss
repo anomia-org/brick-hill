@@ -1,0 +1,90 @@
+.item-card {
+    display: inline-block;
+    margin: 10px;
+    border: 2px solid;
+    border-radius: 2px;
+    text-align: left;
+    position: relative;
+
+    &.active {
+        @include themify() {
+            border-color: themed("blue");
+        }
+    }
+
+    img {
+        vertical-align: top;
+        width: 100%;
+        height: 100%;
+        padding: 10px;
+        margin-bottom: 5px;
+    }
+
+    .item-title {
+        max-width: 128px;
+    }
+
+    @include themify() {
+        border-color: themed("inputs", "blend-border");
+        background: themed("media", "gradient");
+    }
+}
+
+.item-border {
+    &.owns-border,
+    &.event-border,
+    &.special-border {
+        border: 3px solid;
+    }
+    
+    &.special-border {
+        border-color: #ffd52d;
+    }
+    
+    &.owns-border {
+        border-color: #4cb04c;
+    }
+
+    &.first-serial, &.second-serial, &.third-serial {
+        color: #FFF;
+    }
+
+    &.first-serial {
+        border-color: #FFAA33;
+        .trade-serial {
+            background-color: #FFAA3390;
+        }
+    }
+
+    &.second-serial {
+        border-color: #AABBCC;
+        .trade-serial {
+            background-color: #AABBCC90;
+        }
+    }
+
+    &.third-serial {
+        border-color: #AD5522;
+        .trade-serial {
+            background-color: #AD552290;
+        }
+    }
+    
+    &.event-border {
+        @include themify() {
+            border-color: themed("blue");
+        }
+    }
+}
+
+.chart-y {
+    @include themify() {
+        color: themed("chart", "gridY");
+    }
+}
+
+.chart-x {
+    @include themify() {
+        color: themed("chart", "gridX");
+    }
+}

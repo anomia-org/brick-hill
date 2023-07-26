@@ -1,0 +1,138 @@
+$path: "../assets/images/sprites/all.svg";
+// for local testing
+// $path: "main.svg";
+
+.icon {
+    vertical-align: top;
+    background-image: url($path);
+    background-repeat: no-repeat;
+    background-size: auto auto;
+    display: inline-block;
+}
+
+.mint-icon {
+    @extend .icon;
+    margin-left: 3px;
+    width: 24px;
+    height: 24px;
+    background-position: 0 0;
+    vertical-align: sub;
+}
+.ace-icon {
+    @extend .icon;
+    margin-left: 3px;
+    width: 24px;
+    height: 24px;
+    background-position: -29px 0;
+    vertical-align: sub;
+}
+.royal-icon {
+    @extend .icon;
+    margin-left: 3px;
+    width: 24px;
+    height: 24px;
+    background-position: -58px 0;
+    vertical-align: sub;
+}
+.bucks-icon {
+    @extend .icon;
+    width: 22px;
+    height: 20px;
+    background-position: 0 -29px;
+}
+.bits-icon {
+    @extend .icon;
+    padding-right: 3px;
+    width: 21px;
+    height: 20px;
+    background-position: -25px -29px;
+}
+.friends-icon {
+    @extend .icon;
+    padding-right: 3px;
+    width: 20px;
+    height: 20px;
+    background-position: -50px -29px;
+}
+.messages-icon {
+    @extend .icon;
+    padding-right: 3px;
+    width: 20px;
+    height: 20px;
+    background-position: -75px -29px;
+}
+.arrow-down {
+    @extend .icon;
+    padding-right: 3px;
+    width: 17px;
+    height: 19px;
+    background-position: 0 -140px;
+    vertical-align: text-bottom;
+    margin-left: 10px
+}
+.special-icon {
+    @extend .icon;
+    width: 60px;
+    height: 60px;
+    background-position: 1px -75px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.special-e-icon {
+    @extend .icon;
+    width: 60px;
+    height: 60px;
+    background-position: -64px -75px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.owned-check-tri {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+}
+.owned-check {
+    height: 2em;
+    font-size: 1em;
+    transform: translateY(-135%) translateX(-135%);
+    color: #fff;
+    text-align: center
+}
+.dropdown-arrow {
+    font-size: 20px;
+    color: $alternate-grey;
+    cursor: pointer;
+
+    &:hover {
+        font-weight: 600;
+    }
+}
+.item-more {
+    font-size: 20px;
+    color: $alternate-grey;
+}
+.item-more:hover {
+    font-weight: 600;
+}
+.item-more-div {
+    position: absolute;
+    right: 0;
+    margin-right: 5px;
+    cursor: pointer;
+}
+//border-top: 50px solid @if($special) #FFD52D @else #4CB04C @endif;
+.owned-check-tri.special {
+    border-top: 50px solid $special;
+}
+.owned-check-tri.owns {
+    border-top: 50px solid $owns;
+}
+.img-white {
+    filter: brightness(0) invert(1);
+}

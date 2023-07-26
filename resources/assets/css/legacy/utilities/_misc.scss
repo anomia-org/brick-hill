@@ -1,0 +1,77 @@
+.overflow-auto {
+    overflow: auto;
+}
+
+.block {
+    display: block;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.circle {
+    border-radius: 50%;
+}
+
+.unselectable {
+    user-select: none;
+}
+
+.ellipsis {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.no-right-rad,
+div.no-right-rad,
+label.no-right-rad {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.no-rad,
+div.no-rad,
+label.no-rad {
+    border-radius: 0;
+}
+
+.no-left-rad,
+div.no-left-rad,
+label.no-left-rad {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.absolute {
+    position: absolute;
+
+    &.right {
+        right: 0;
+    }
+
+    &.left {
+        left: 0;
+    }
+
+    &.top {
+        top: 0;
+    }
+
+    &.bottom {
+        bottom: 0;
+    }
+}
+
+.f-right {
+    float: right;
+}
+
+.f-left {
+    float: left;
+}

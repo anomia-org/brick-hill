@@ -1,0 +1,44 @@
+tr:first-of-type:not(.no-top-border) {
+    @include themify($themes) {
+        border-bottom: 1px solid themed("dark");
+    }
+}
+
+tr.selected {
+    @include themify($themes) {
+        background: themed("tabs", "vertical-gradient");
+    }
+}
+
+th, td {
+    padding: 8px;
+}
+
+th {
+    font-weight: 500;
+    text-align: left;
+
+    &.center {
+        text-align: center;
+    }
+}
+
+table {
+    border-collapse: collapse;
+}
+
+table.border {
+    tr:not(:first-of-type) {
+        @include themify() {
+            border-bottom: 1px solid themed("inputs", "blend-border");
+        }
+    }
+}
+
+table.striped {
+    tr:nth-of-type(even) {
+        @include themify($themes) {
+            background-color: themed("table", "darker");
+        }
+    }
+}

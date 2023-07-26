@@ -1,0 +1,20 @@
+.side-ad {
+    padding-top: 50px;
+    padding-left: 50px;
+    padding-right: 50px;
+    position: absolute;
+
+    display:none;
+}
+
+@media only screen and (min-width: 1500px) {
+    .side-ad {
+        display: block;
+    }
+}
+@media only screen and (max-width: 1800px) {
+    .side-ad {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}

@@ -1,0 +1,15 @@
+@mixin color-class($theme) {
+    color: map-get($theme, "color");
+    background-color: map-get($theme, "background");
+    border-color: map-get($theme, "border");
+}
+
+@mixin color-classes($map) {
+    @each $class,$theme in $map {
+        @if $class != "default" {
+            &.#{$class} {
+                @include color-class($theme);
+            }
+        }
+    }
+}

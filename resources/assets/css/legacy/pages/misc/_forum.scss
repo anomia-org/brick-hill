@@ -1,0 +1,175 @@
+.forum-links {
+    .inline {
+        display: inline-block;
+    }
+
+    .content {
+        overflow: hidden;
+    }
+
+    a {
+        color: $gray;
+        padding: 0 10px;
+    }
+
+    .inline .inline {
+        display: inline-block;
+    }
+}
+
+.m0.thread-card {
+    padding: 10px;
+    border-radius: 0;
+}
+
+.divide {
+    width: 1px;
+    height: 100%;
+    background-color: $divider;
+    padding: 10px 1px 10px 0;
+}
+
+.forum-tag {
+    position: relative;
+    background: $forum-tag-bg;
+    border-radius: 4px;
+    padding: 6px 8px;
+    color: $forum-tag-color;
+    float: right;
+
+    &:after {
+        right: 100%;
+        top: 50%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        border-right-color: $forum-tag-bg;
+        border-width: 5px;
+        margin-top: -5px
+    }
+}
+
+.thread-label {
+    font-size: .6em;
+    color: #FFF;
+    margin-right: 4px;
+    padding: 4px;
+    border-radius: 4px;
+    
+    &.blue {
+        background-color: get('blue.color');
+    }
+
+    &.green {
+        background-color: get('green.color');
+    }
+
+    &.red {
+        background-color: get('red.color');
+    }
+
+    &.orange {
+        background-color: get('orange.color');
+    }
+}
+
+.thread {
+    overflow: auto;
+    margin-bottom: 10px;
+}
+
+.thread-row {
+    position: relative;
+    overflow: auto;
+
+    & .p {
+        word-wrap: break-word;
+        margin-bottom: 10px;
+    }
+
+    &:last-child {
+        border-bottom: 0
+    }
+}
+
+@media handheld, only screen and (max-width: 767px) {
+    .forum-links .content {
+        overflow-x: scroll;
+    }
+
+    .forum-links {
+        display: block;
+    }
+}
+
+.content .board div.stat {
+    text-align: center;
+    padding-top: 20px;
+    padding-right: 0;
+}
+
+.stat .title {
+    font-weight: 500;
+    font-size: .9em;
+    color: $ablack;
+}
+
+.board-info a {
+    color: $ablack;
+}
+
+.card .topic div.stat {
+    padding-right: 0;
+}
+
+.board-info {
+    height: 60px;
+}
+
+.forum-bar {
+    & a {
+        color: $darkest-gray;
+    }
+
+    & .fa-angle-double-right {
+        color: $forumbargray;
+        padding: 0 5px;
+    }
+}
+
+.forum-options {
+    color: $light-white;
+}
+
+.admin-forum-options {
+    a, button {
+        color: $light-white;
+        display: inline-block;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 16px;
+        background-color: transparent;
+        border: none;
+        padding: 0 20px 0 0;
+    }
+
+    form {
+        display: inline-block;
+    }
+}
+
+.report:hover {
+    color: $dark-red;
+    cursor: pointer;
+}
+
+.forum-reply:hover {
+    color: $blue;
+}
+
+.forum-quote:hover {
+    color: $green;
+}
+

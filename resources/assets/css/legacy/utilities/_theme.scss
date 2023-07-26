@@ -1,0 +1,3 @@
+@function bcolor($key: "text") {
+    @return map-get($colors, $key);
+}

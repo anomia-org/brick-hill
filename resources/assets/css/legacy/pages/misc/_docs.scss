@@ -1,0 +1,57 @@
+// rarted docs
+
+/*html,body {
+    //background-color: #fff !important;
+}*/
+
+ul.docs {
+    list-style: none;
+}
+
+/*ul.docs li {
+
+}*/
+
+ul.docs li.section {
+    margin-top:7px;
+    margin-bottom: 5px;
+    display: block;
+    font-size: 1em;
+    color: #999;
+    position: relative;
+    z-index: 1;
+    padding: 10px 5px;
+
+    &::before {
+        border-top: 2px solid #dfdfdf;
+        content:"";
+        margin: 0 auto; /* this centers the line to the full width specified */
+        position: absolute; /* positioning must be absolute here, and relative positioning must be applied to the parent */
+        top: 50%; left: 0; right: 0; bottom: 0;
+        width: 95%;
+        z-index: -1;
+    }
+
+    & span {
+        padding: 5px;
+        background-color: #fff;
+    }
+}
+
+ul.docs li a {
+    border-radius: 5px;
+    display: block;
+    padding: 10px;
+    transition: box-shadow 0.1s;
+    margin-bottom: 5px;
+}
+
+ul.docs li a.active {
+    color: #fff;
+    background-color: #40b8ff;
+    box-shadow: 0px 3px 12px 0px rgba(0,0,0,0.1);
+}
+
+ul.docs li a:hover {
+     box-shadow: 0px 3px 12px 0px rgba(0,0,0,0.1);
+}

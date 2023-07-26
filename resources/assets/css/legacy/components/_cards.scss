@@ -1,0 +1,77 @@
+.card {
+    border-radius: $border-radius;
+    overflow: auto;
+    box-shadow: $box-shadow;
+
+    .top:not(.absolute) {
+        overflow: auto;
+        padding: 10px;
+        font-weight: 700;
+        border-bottom: 1.5px solid;
+        @include color-class( map-get($card-colors, 'default') );
+
+        @include color-classes($card-colors);
+
+    }
+
+    .content {
+        height: inherit;
+        overflow: auto;
+        padding: 10px;
+        background-color: $card-bg;
+    }
+
+    .border {
+        border: 1px solid $card-border;
+    }
+
+    .name {
+        overflow: hidden;
+        color: $ablack;
+        font-weight: 600;
+        display: inline-block;
+    }
+
+    .creator {
+        overflow:hidden;
+        color: $alternate-grey;
+        font-size: .9em;
+    }
+
+    .thumbnail {
+        padding: 20px;
+        text-align: center;
+        background-color: $thumbnail-bg;
+
+        &.no-padding {
+            padding: 0px;
+        }
+
+        img {
+            height: 100%;
+            width: 100%;
+            display: block;
+        }
+
+        &.dark {
+            background-color:  $thumbnail-bg-dark;
+        }
+    }
+
+    .footer {
+        border-top: 1px solid $footer-border;
+        padding: 10px;
+        background-color: $footer-bg;
+
+        .playing {
+            text-align: right;
+            color: $playing;
+            font-weight: 600;
+        }
+    }
+
+    &:not(.no-margin) {
+        margin-bottom: 10px;
+    }
+
+}

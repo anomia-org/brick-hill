@@ -1,0 +1,80 @@
+.vertical-tabs {
+    li {
+        border-radius: 2px 0 0 2px;
+        text-transform: uppercase;
+        padding: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 100ms;
+
+        &.active {
+            @include themify($themes) {
+                color: #FFF;
+                background: themed("tabs", "vertical-gradient");
+            }
+        }
+
+        &:hover {
+            @include themify($themes) {
+                background-color: themed("tabs", "hover");
+            }
+        }
+    }
+}
+
+.new-tabs {
+    margin-bottom: 10px;
+
+    .tab {
+        text-align: center;
+        border-radius: 0;
+        padding: 10px;
+        border-bottom: 5px solid;
+        font-size: 1.1rem;
+        font-weight: 600;
+
+        text-transform: uppercase;
+
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+
+        &.small-tab-text {
+            font-size: 1rem;
+        }
+
+        &:not(.last-tab) {
+            margin-right: 3px;
+        }
+
+        @include themify() {
+            border-color: themed("inputs", "blend-border");
+        }
+
+        &.active {
+            @include themify() {
+                border-color: themed("tabs", "bottom-border");
+            }
+        }
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    .tab-body {
+        min-width: 100%;
+        overflow: auto;
+        padding-top: 10px;
+    }
+
+    .tab-body:not(.active) {
+        display: none;
+    }
+}
+
+.button-tabs {
+    .button-tab:not(.active) {
+        display: none;
+    }
+}

@@ -1,0 +1,34 @@
+hr, .line {
+    border: 0;
+    height: 0;
+    border-top: 1px solid $line-color;
+    border-bottom: 1px solid $line-color;
+}
+
+.alert {
+    margin-bottom: 10px;
+    border-radius: $border-radius;
+    text-align: center;
+    padding: 10px;
+    color: $alert-color;
+
+    @each $class, $color in $alert-colors {
+        &.#{$class} {
+            background-color: $color;
+        }
+    }
+}
+
+.blockquote, blockquote {
+    word-wrap: break-word;
+    padding: 3px 0px 3px 3px;
+    border-left: 4px solid $blockquote-default;
+    margin-left: 0;
+
+    @each $class, $color in $blockquote-themes {
+        &.#{$class} {
+            border-color: $color;
+        }
+    }
+
+}

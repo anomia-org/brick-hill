@@ -1,0 +1,47 @@
+<html>
+	<head>
+		<p> THE HALLOWEEN ARG I</p>
+		<style>
+ 			 img {
+ 				 display: block;
+ 				 margin-left: auto;
+ 				 margin-right: auto;
+ 			}
+			img:hover {
+  animation: shake 0.5s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes shake {
+  0% { transform: translate(1px, 0px) rotate(0.1deg); }
+  10% { transform: translate(0px, 1px) rotate(-0.1deg); }
+  20% { transform: translate(-1px, 0px) rotate(0.1deg); }
+  30% { transform: translate(0px, -1px) rotate(0.1deg); }
+  40% { transform: translate(1px, 0px) rotate(0deg); }
+  50% { transform: translate(0px, 1px) rotate(-0.1deg); }
+  60% { transform: translate(-1px, 0px) rotate(0.1deg); }
+  70% { transform: translate(0px, -1px) rotate(.0deg); }
+  80% { transform: translate(1px, 0px) rotate(-0.1deg); }
+  90% { transform: translate(0px, 1px) rotate(0deg); }
+  100% { transform: translate(-1px, 0px) rotate(0.1deg); }
+}
+			body {
+  				background-image: url("https://brkcdn.com/trick/treat/PUMPKINSBG.png");
+ 				background-color: #cccccc;
+  				overflow: hidden;
+			}
+		</style>
+	</head>
+	<body>
+		<audio id="my_audio" src="https://brkcdn.com/trick/treat/INDUSTRIAL.mp3" loop="loop"></audio>
+		<script>
+			window.onload = function() {
+				document.getElementById("my_audio").play();
+			}
+		</script>
+		<img src="https://brkcdn.com/trick/treat/SPINMALE.png" class="center">
+	</body>
+	<footer>
+		<p style="color:white;">Background by Liranbz-GobzFareld</p>
+	</footer>
+</html>

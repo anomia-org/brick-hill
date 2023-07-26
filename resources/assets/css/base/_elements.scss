@@ -1,0 +1,5 @@
+hr {
+    @include themify() {
+        border-color: themed("inputs", "blend-border");
+    }
+}

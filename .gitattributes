@@ -1,0 +1,7 @@
+*.css linguist-vendored
+*.scss linguist-vendored
+*.js linguist-vendored
+*.woff2 binary
+*.otf binary
+*.ttf binary
+CHANGELOG.md export-ignore

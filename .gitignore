@@ -1,0 +1,12 @@
+/node_modules
+/storage
+/vendor
+/database/schema/*.sql
+/public/dist/
+/public/*-manifest.json
+/config/file-systems.php
+/.vscode
+.env
+.phpunit.result.cache
+_ide*
+rr

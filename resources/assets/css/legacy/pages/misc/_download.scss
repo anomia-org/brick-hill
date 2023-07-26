@@ -1,0 +1,189 @@
+.download-page {
+    color: #FFF;
+    
+    .splash {
+        width: 500px;
+        height: 423px;
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    a.download {
+        text-decoration:none;
+    }
+    a.download h5 {
+        margin:0;
+    }
+    a.download:hover button {
+        cursor: pointer;
+        box-shadow: 0px 2px 5px rgba(0,0,0,0.2);
+    }
+    .holder {
+        position: relative;
+    }
+    .holder.legacy button.nh-button {
+        border-color: #95B90B;
+        background-color: rgba(0,0,0,0);
+        padding: 0px 10px;
+    }
+    .holder.legacy {
+        height: 423px;
+    }
+    .holder.experimental {
+        background: linear-gradient(90deg, rgba(0,145,236,1) 0%, rgba(1,169,254,1) 50%, rgba(88,198,254,1) 100%);
+    }
+    .holder.experimental .grid {
+        padding-top: 50px;
+        position: relative;
+        padding-bottom: 0;
+    }
+    .buy-button-holder {
+        margin-top: 150px;
+    }
+    .holder.blogs {
+        background: linear-gradient(180deg, rgba(36,36,38,1) 0%, rgba(19,19,21,1) 100%);
+    }
+    .holder.experimental .buy-button {
+        position: relative;
+        border-radius: 2px;
+        border: none;
+        background-color: #FFF;
+        font-size: 2.3em;
+        color: rgba(1,169,254,1);
+        padding: 20px 40px;
+    }
+    .buy-button div {
+        color: #A6A6AD;
+        font-size: 15px;
+        font-weight: 500;
+        text-transform: initial;
+    }
+    .other-versions {
+        padding: 15px;
+        cursor: pointer;
+        margin-bottom: 25px;
+    }
+    .workshop-brick {
+        float: left;
+        max-width: 100%;
+        width: 350px;
+        height: 218px;
+    }
+    .brick-text {
+        padding-top: 50px;
+    }
+    .detailed-info {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding-right: 0;
+        margin: 0 8px;
+        margin-bottom: 50px;
+        width: calc(33.3% - 20px);
+    }
+    .detailed-info img {
+        height: 100%;
+        width: 100%;
+    }
+    .detailed-info .creator {
+        font-style: italic;
+        color: #CBCBD3;
+        height: 0;
+        overflow: hidden;
+        transition: height 100ms;
+    }
+    .detailed-info:hover .creator {
+        height: 20px;
+    }
+    .detailed-info img {
+        border-radius: 2px;
+    }
+    .bottom-text {
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        padding: 12px;
+        padding-bottom: 9px;
+        background-color: rgb(64 63 63 / 48%);
+        color: #fff;
+    }
+    .tile2 {
+        display: inline;
+        position: absolute;
+        width: 452px;
+        height: 322px;
+        border-radius: 2px;
+        z-index: 4;
+        right: -139px;
+        content: url("@/images/download/tile2.png");
+    }
+    .tile4 {
+        display: inline;
+        position: absolute;
+        border-radius: 2px;
+        content: url("@/images/download/tile4.png");
+    }
+    .workshop-brick {
+        content: url("@/images/download/workshopbrk.png");
+    }
+    .splash.shuttle {
+        content: url("@/images/download/shuttle.png");
+    }
+    .performance-upgrades {
+        content: url("@/images/download/performance-upgrades.png");
+    }
+    .mats-surfaces {
+        content: url("@/images/download/mats-surfaces.png");
+    }
+    .intuitive-controls {
+        content: url("@/images/download/intuitive-controls.png");
+    }
+    .new-envs {
+        content: url("@/images/download/new-envs.png");
+    }
+    .dynamic-lighting {
+        content: url("@/images/download/dynamic-lighting.png");
+    }
+    .ongoing-dev {
+        content: url("@/images/download/ongoing-dev.png");
+    }
+}
+
+@media handheld, only screen and (max-width: 1430px) {
+    .download-page .tile2 {
+        display: none;
+    }
+}
+@media handheld, only screen and (max-width: 1200px) {
+    .download-page .tile4 {
+        position: relative;
+    }
+}
+@media handheld, only screen and (max-width: 767px) {
+    .download-page .tile4 {
+        display: none;
+    }
+    .download-page .detailed-info {
+        margin: 0 0 8px;
+        width: calc(50% - 3px);
+    }
+}
+@media handheld, only screen and (max-width: 512px) {
+    .download-page .detailed-info {
+        margin: 0 0 8px;
+        width: 100%;
+    }
+    .download-page .holder.experimental .buy-button {
+        font-size: 1em;
+    }
+}
+@media handheld, only screen and (min-width: 1200px) {
+    .download-page .tile4 {
+        width: 550px;
+        height: 322px;
+        top: -40px;
+        right: -23px;
+    }
+}

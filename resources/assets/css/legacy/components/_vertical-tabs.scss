@@ -1,0 +1,21 @@
+.vertical-tab {
+    border-radius: $vertical-tabs-radius;
+    list-style: none;
+    overflow: hidden;
+
+    li, .tab {
+        border-left: $vertical-tabs-border-x solid transparent;
+        padding: $vertical-tabs-padding;
+        transition: background-color .1s linear;
+
+        &.active {
+            border-color: $vertical-tabs-border;
+            background-color: $vertical-tabs-active;
+        }
+        &:hover {
+            cursor: pointer;
+            border-color: $vertical-tabs-border;
+            background-color: $vertical-tabs-hover;
+        }
+    }
+}

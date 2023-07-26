@@ -1,0 +1,26 @@
+@use "sass:string";
+
+@function color-from-gradient($gradient) {
+    // ex: linear-gradient(0deg, #007B1F 0%, #00BD44 100%);
+    // remove all data before first comma (the function)
+    $removeFunction: string.slice($gradient, string.index($gradient, ",") + 1);
+    // ex:  #007B1F 0%, #00BD44 100%);
+
+    // remove all data after the first color
+    // ex:  #007B1F 0%
+    $removeAfterColor: string.slice($removeFunction, 1, string.index($removeFunction, ",") - 1);
+
+    $finalColor: "";
+    // if the first value is a space
+    // which isnt required as you dont need a space after a comma
+    // we want to replace that with empty so we can get the index of the space between the color and the gradient percentage
+    @if string.index($removeAfterColor, " ") == 1 {
+        $removeFirstSpace: string.slice($removeAfterColor, 2);
+        // remove all data after the space to be left with only the color
+        $finalColor: string.slice($removeFirstSpace, 1, string.index($removeFirstSpace, " ") - 1);
+    } @else {
+        $finalColor: string.slice($removeAfterColor, 1, string.index($removeAfterColor, " ") - 1);
+    }
+
+    @return $finalColor;
+}

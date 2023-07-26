@@ -1,0 +1,65 @@
+.mb-10 {
+    margin-bottom: 10px;
+}
+
+.mb-5 {
+    margin-bottom: 5px;
+}
+
+.mb-8 {
+    margin-bottom: 8px;
+}
+
+.mb-12 {
+    margin-bottom: 12px;
+}
+
+.mb-16 {
+    margin-bottom: 16px;
+}
+
+.mb-20 {
+    margin-bottom: 20px;
+}
+
+.mr-5 {
+    margin-right: 5px;
+}
+
+.mr-10 {
+    margin-right: 10px;
+}
+
+.ml-5 {
+    margin-left: 5px;
+}
+
+.mr-20 {
+    margin-right: 20px;
+}
+
+.ml-20 {
+    margin-left: 20px;
+}
+
+.mt-2 {
+    margin-top: 2px;
+}
+
+@media only screen and (min-width: 767px) {
+    .mb-10-no-mobile {
+        margin-bottom: 10px;
+    }
+
+    .mb-12-no-mobile {
+        margin-bottom: 12px;
+    }
+
+    .mb-16-no-mobile {
+        margin-bottom: 16px;
+    }
+
+    .mb-20-no-mobile {
+        margin-bottom: 20px;
+    }
+}

@@ -1,0 +1,27 @@
+.pages {
+    text-align: center;
+
+    @each $class, $color in $blockquote-themes {
+        &.#{$class} {
+            .page.active {
+                color: $color;
+            }
+        }
+    }
+
+    .page {
+        color: $pagintation-default;
+        padding: $pagintation-padding;
+        font-weight: $pagintation-thickness;
+        cursor: pointer;
+
+        &:not(:last-child) {
+            padding-right: $pagintation-spacing;
+        }
+
+        &.active {
+            color: $pagintation-active;
+        }
+    }
+
+}

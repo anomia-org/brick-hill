@@ -1,0 +1,37 @@
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" width="60px" height="235px" viewBox="0 0 60 235">
+    <svg id="arrow">
+        <path d="M1.45 5l7.05 7 7-7" fill="none" stroke="#000" stroke-width="2.135" />
+    </svg>
+    <svg id="bits" y="20">
+        <circle r="4.469" cy="10" cx="10" stroke-width="1.062" fill="#f49b00" stroke="#f49b00" />
+        <circle r="9.52" cy="10" cx="10" fill="none" stroke="#f49b00" stroke-width=".961" />
+    </svg>
+    <svg id="bucks" y="43">
+        <g fill="none" stroke="#007b28">
+            <path d="M10 3.5l-9.746 4 .043 5 9.703 4 9.576-4v-5z" />
+            <path d="M.254 7.5l9.746 4 9.576-4" />
+        </g>
+        <path d="M.254 7.5l.043 5 9.703 4 9.576-4v-5L10 11.5z" fill="#007b28" />
+    </svg>
+    <svg id="friends" y="66">
+        <path d="M3.5 19.5l1.5-7c2.939-1.697 7.039-1.71 10 0l1.5 7zM6 2.5l1 7h6l1-7c-3-.804-5.016-.8-8 0z" fill="none" stroke="#000" stroke-linejoin="round" />
+        <path d="M8.5 10.5h3" fill="none" stroke="#000" />
+    </svg>
+    <svg id="messages" y="89">
+        <g paint-order="markers fill stroke">
+            <path d="M3 9.5h10zM3 12.5h7" fill="none" stroke="#000" paint-order="markers fill stroke" />
+        </g>
+        <path d="M4.5 5V2.5h15v9H17" fill="none" stroke="#000" stroke-linejoin="round" />
+        <path d="M.5 15.5v-9h15v9h-8l-4 3.5v-3.5z" fill="none" stroke="#000" stroke-linejoin="round" />
+    </svg>
+    <svg id="special" y="112">
+        <path d="M10 0h50v50z" fill="#fed52f" />
+        <path d="M-48.615-11.761l-5.505-.188 4.435-3.267-1.523-5.294 4.478 3.208 4.564-3.083-1.667 5.25 4.343 3.387-5.508.037-1.88 5.177z" transform="matrix(-.99976 0 0 -1.00255 .009 -.054)" fill="#fff" stroke="#fff" stroke-width="2.981" stroke-linecap="round" stroke-linejoin="round" stroke-opacity=".941" paint-order="fill markers stroke" />
+    </svg>
+    <svg id="speciale" y="175">
+        <path d="M10 0h50v50z" fill="#fed52f" />
+        <path d="M-48.615-11.761l-5.505-.188 4.435-3.267-1.523-5.294 4.478 3.208 4.564-3.083-1.667 5.25 4.343 3.387-5.508.037-1.88 5.177z" transform="matrix(-.99976 0 0 -1.00255 .009 -.054)" fill="#f61415" stroke="#f61415" stroke-width="2.981" stroke-linecap="round" stroke-linejoin="round" paint-order="fill markers stroke" />
+        <path d="M10 0l50 50v10L0 0z" fill="#f61415" />
+    </svg>
+</svg>

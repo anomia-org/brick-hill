@@ -1,0 +1,262 @@
+@use "sass:map";
+
+// These variables will be merged into the final theme arrays, themes can overwrite them by using the same names
+$base-theme: (
+    "blue": #00A9FE,
+    buttons: (
+        "blue": (
+            bg: #00A9FE,
+            gradient: linear-gradient(0deg, #007CDC 0%, #00A9FE 100%),
+        ),
+        "yellow": (
+            bg: #FFC200,
+            gradient: linear-gradient(0deg, #F39B00 0%, #FFC200 100%),
+        ),
+        "green": (
+            bg: #3ADE55,
+            gradient: linear-gradient(0deg, #30B747 0%, #3ADE55 100%),
+        ),
+        "bucks": (
+            bg: #007B1F,
+            gradient: linear-gradient(0deg, #007B1F 0%, #00BD44 100%),
+        ),
+        "bits": (
+            bg: #F39B00,
+            gradient: linear-gradient(0deg, #F39B00 0%, #FFC200 100%),
+        ),
+        "free": (
+            bg: #0AF,
+            gradient: #0AF,
+        ),
+        "red": (
+            bg: #FF3344,
+            gradient: linear-gradient(0deg, #DD0011 0%, #FF3344 100%),
+        ),
+    ),
+    notifications: (
+        warning: #ef9526,
+        success: #23d160,
+        error: #ef263d,
+    ),
+    button-disabled: (
+        bg: #D0D0D0,
+        gradient: linear-gradient(0deg, #ABABAB 0%, #D0D0D0 100%),
+    ),
+    text-colors: (
+        "bucks": linear-gradient(0deg, #007B1F 0%, #00BD44 100%),
+        "bits": linear-gradient(0deg, #F39B00 0%, #FFC200 100%),
+        "free": #00A9FE,
+        "blue": #00A9FE
+    ),
+    tag-color: #4F5660,
+    tabs: (
+        vertical-gradient: linear-gradient(0deg, #007CDC 0%, #00A9FE 100%),
+        bottom-border: #00A9FE,
+    ),
+);
+
+// These are all of the custom themes with deviations from the base-theme
+$custom-themes: (
+    default: (
+        text: #2D2D31,
+        dark: #242426,
+        bright: #FFF,
+        body: #EDEDED,
+        inputs: (
+            placeholder: #C9C9D2,
+            border: #C9C9D2,
+            blend-border: #C9C9D2,
+        ),
+        text-colors: (
+            light: #4B4B50
+        ),
+        events: (
+            promocodes: (
+                item-bg: #D6D6DB,
+                item-gradient: radial-gradient(circle, #BCA285 0%, #D6D6DB 75%),
+            ),
+        ),
+        tabs: (
+            hover: #D6D6DB,
+        ),
+        table: (
+            darker: #DCDCDC,
+        ),
+        media: (
+            gradient: radial-gradient(circle, #FFFFFF 0%, transparent 100%),
+        ),
+        chart: (
+            gridY: #00000088,
+            gridX: #00000011,
+        ),
+        // opposite values of dark theme
+        black-svg-invert: invert(0),
+        white-svg-invert: invert(1),
+        divider: #ccc,
+        card-hover: #E7E7E7,
+    ),
+    dark: (
+        text: #FFF,
+        dark: #FFF,
+        bright: #242426,
+        body: #242426,
+        inputs: (
+            placeholder: #C9C9D2,
+            border: #FFF,
+            blend-border: #333
+        ),
+        text-colors: (
+            light: #CBCBD3
+        ),
+        events: (
+            promocodes: (
+                item-bg: #29292B,
+                item-gradient: radial-gradient(circle, #41382E 0%, #29292B 75%),
+            ),
+        ),
+        tabs: (
+            hover: #29292B,
+        ),
+        table: (
+            darker: #2B2B2D,
+        ),
+        media: (
+            gradient: radial-gradient(circle, #4F56604D 0%, transparent 100%),
+        ),
+        chart: (
+            gridY: #FFFFFF88,
+            gridX: #FFFFFF11,
+        ),
+        // if an svg is black already invert it to become white on black
+        black-svg-invert: invert(1),
+        // if an svg is white we want to keep it that way
+        white-svg-invert: invert(0),
+        divider: #303133,
+        card-hover: #2D2D31,
+    ),
+    holiday-dark: (
+        text: #FFF,
+        dark: #FFF,
+        bright: #242426,
+        body: #242426,
+        inputs: (
+            placeholder: #C9C9D2,
+            border: #FFF,
+            blend-border: #333
+        ),
+        text-colors: (
+            light: #CBCBD3
+        ),
+        events: (
+            promocodes: (
+                item-bg: #06182a,
+                item-gradient: radial-gradient(circle,#3c4754c9 0%,#06182a 75%),
+            ),
+        ),
+        tabs: (
+            gradient: linear-gradient(0deg,#930000 0%,#ff0000 100%),
+            hover: #0b1628,
+            bottom-border: #ff0000,
+        ),
+        table: (
+            darker: #081325,
+        ),
+        media: (
+            gradient: radial-gradient(circle, #21446c 0%, transparent 100%),
+        ),
+        chart: (
+            gridY: #FFFFFF88,
+            gridX: #FFFFFF11,
+        ),
+        buttons: (
+            "blue": (
+                bg: #ff0000,
+                gradient: linear-gradient(0deg,#930000 0%,#ff0000 100%),
+            ),
+            "yellow": (
+                bg: #008316,
+                gradient: linear-gradient(0deg,#004a02 0%,#008316 100%),
+            ),
+            "green": (
+                bg: #008316,
+                gradient: linear-gradient(0deg,#004a02 0%,#008316 100%),
+            ),
+            "free": (
+                bg: #ff0000,
+                gradient: linear-gradient(0deg,#930000 0%,#ff0000 100%),
+            )
+        ),
+        // if an svg is black already invert it to become white on black
+        black-svg-invert: invert(1),
+        // if an svg is white we want to keep it that way
+        white-svg-invert: invert(0),
+        divider: #303133,
+    ),
+    holiday-light: (
+        text: #000,
+        dark: #242426,
+        bright: #FFF,
+        body: #FFF,
+        inputs: (
+            placeholder: #81a6bd,
+            border: #81a6bd,
+            blend-border: #8cb3cb,
+        ),
+        text-colors: (
+            light: #4B4B50
+        ),
+        events: (
+            promocodes: (
+                item-bg: #a7d0eb,
+                item-gradient: radial-gradient(circle,#3c4754c9 0%,#9bd0f3 75%),
+            ),
+        ),
+        tabs: (
+            gradient: linear-gradient(0deg,#930000 0%,#ff0000 100%),
+            hover: #D6D6DB,
+            bottom-border: #ff0000,
+        ),
+        table: (
+            darker: #c3cddb,
+        ),
+        media: (
+            gradient: radial-gradient(circle, #caf3ff 0%, transparent 100%),
+        ),
+        chart: (
+            gridY: #00000088,
+            gridX: #00000011,
+        ),
+        buttons: (
+            "blue": (
+                bg: #ff0000,
+                gradient: linear-gradient(0deg,#930000 0%,#ff0000 100%),
+            ),
+            "yellow": (
+                bg: #008316,
+                gradient: linear-gradient(0deg,#004a02 0%,#008316 100%),
+            ),
+            "green": (
+                bg: #008316,
+                gradient: linear-gradient(0deg,#004a02 0%,#008316 100%),
+            ),
+            "free": (
+                bg: #ff0000,
+                gradient: linear-gradient(0deg,#930000 0%,#ff0000 100%),
+            )
+        ),
+        // opposite values of dark theme
+        black-svg-invert: invert(0),
+        white-svg-invert: invert(1),
+        divider: #ccc,
+    ),
+);
+
+$themes: ();
+
+// This merges all of the themes together with the base themes to get the final values to be used
+@each $name, $theme in $custom-themes {
+    $final: (
+        $name: map.deep-merge($base-theme, $theme)
+    );
+    $themes: map.deep-merge($themes, $final);
+}

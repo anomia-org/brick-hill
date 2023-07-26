@@ -1,0 +1,51 @@
+.notification-holder {
+    pointer-events: none;
+    width: 100%;
+    position: absolute;
+    overflow: hidden;
+    height: 60px;
+    top: -20px
+}
+
+.alert {
+    margin-bottom: 10px;
+    border-radius: 5px;
+    text-align: center;
+    padding: 10px;
+    color: #FFF;
+    z-index: 10000;
+
+    &.transition {
+        width: 100%;
+
+        position: absolute;
+        opacity: 0.95;
+        transition: top 0.7s;
+
+        &.open {
+            top: 20px;
+        }
+    
+        &.closed {
+            top: -60px;
+        }
+    }
+
+    &.warning {
+        @include themify() {
+            background-color: themed("notifications", "warning");
+        }
+    }
+
+    &.success {
+        @include themify() {
+            background-color: themed("notifications", "success");
+        }
+    }
+
+    &.error {
+        @include themify() {
+            background-color: themed("notifications", "error");
+        }
+    }
+}

@@ -1,0 +1,147 @@
+<html>
+	<head>
+		<style>
+			.a {
+				pointer-events: none;
+				height: 0px;
+				width: 300px;
+				background-color: FFF;
+				border-radius: 50%;
+				display: inline-block;
+			}
+			.sun {
+				pointer-events: none;
+				height: 432px;
+				width: 432px;
+				background-color: #000;
+				border-radius: 50%;
+				display: inline-block;
+				filter: grayscale(1) invert(1);
+				mix-blend-mode: difference;
+			}
+			.sphere {
+				position: fixed;
+				height: 50px;
+				width: 50px;
+				margin-top: 360px;
+			}
+			.sphere2 {
+				pointer-events: none;
+				height: 5000px;
+				width: 5000px;
+				background-color: #FFF;
+				border-radius: 50%;
+				display: inline-block;
+				margin-top: 360px;
+			}
+			 img.m {
+			 	 display: block;
+				 position: absolute;
+				 animation-name: imgScrollLeft;
+				 animation-duration: 3s;
+				 animation-iteration-count: infinite;
+				 animation-timing-function: linear;
+				 image-repeat: repeat;
+				 pointer-events: none;
+			 }
+			img.d {
+			 	 display: block;
+				 position: absolute;
+				 animation-name: imgScrollLeft;
+				 animation-duration: 2s;
+				 animation-iteration-count: infinite;
+				 animation-timing-function: linear;
+				 image-repeat: repeat;
+				 pointer-events: none;
+			 }
+			 
+			@keyframes imgScrollLeft {
+			  0% {left:-400px; top:0px;}
+			  100% {left:0px; top:0px;}
+			}
+			
+			body {
+				background-repeat: no-repeat;
+				background-image: url("https://brkcdn.com/trick/treat/stars2.png");
+				background-repeat: repeat;
+ 				background-color: #000000;
+				animation: bgScrollLeft 5s linear infinite;
+				overflow: hidden;
+			}
+			
+			@keyframes bgScrollLeft {
+			  from {
+				background-position: 0 0;
+			  }
+			  to {
+				background-position: 800px 0px;
+			  }
+			}
+			h1 {
+			 	margin-left: 800px;
+ 				margin-right: auto;
+			}
+			p {
+			 	margin-left: 830px;
+ 				margin-right: auto;
+			}
+		</style>
+	</head>
+	<body>
+		<audio id="my_audio" src="https://brkcdn.com/trick/treat/space.mp3" loop="loop"></audio>
+		<script>
+		window.onload = function() {
+			document.getElementById("my_audio").play();
+		}
+		</script>
+		<h1 style="color:white;">Solar System ARCHIVE</h1>
+		<p style="color:white;">Welcome to the Solar System ARCHIVE !</p>
+		<img src="https://brkcdn.com/trick/treat/stars4.png" class="m">
+		<img src="https://brkcdn.com/trick/treat/stars5.png" class="d">
+		2200
+		2102
+		2211
+		2221
+		10020
+		2120
+		2220
+		2102
+		10001
+		2122
+		2121
+		2102
+		2210
+		2120
+		2211
+		2221
+		2211
+		2201
+		10010
+		2201
+		10002
+		2202
+		10011
+		10002
+		10010
+		10002
+		10010
+		2221
+		2222
+		10010
+		10001
+		10022
+		2201
+		2220
+		2122
+		<div class="a"></div>
+		<div class="sun"></div>
+		<div class="sun"></div>
+		<div class="sun"></div>
+</body>
+<footer>
+<a href="https://brkcdn.com/trick/treat/5.SPLITSUM.rar" download="proposed_file_name">
+	<img src="https://brkcdn.com/trick/treat/earth.png" class="sphere">
+</a>
+<div class="sphere2"></div>
+</footer>
+</html>

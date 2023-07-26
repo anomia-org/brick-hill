@@ -1,0 +1,26 @@
+@use "sass:meta";
+@use "sass:string";
+
+@include themify() {
+    color: themed("text");
+
+    @each $class, $color in themed("text-colors") {
+        @if meta.type-of($color) == "color" {
+            .#{$class}-text {
+                color: $color;
+            }
+        }
+        @else if meta.type-of($color) == "string" {
+            .#{$class}-text {
+                color: color-from-gradient($color);
+                background: $color;
+                -webkit-text-fill-color: transparent;
+                -webkit-background-clip: text;
+                background-clip: text;
+            }
+        }
+        @else {
+            @error "Invalid color sent to text-colors"
+        }
+    }
+};

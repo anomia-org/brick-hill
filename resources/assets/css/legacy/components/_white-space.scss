@@ -1,0 +1,31 @@
+@mixin genWhiteSpace($name, $side: "all", $size: 5px) {
+    $class: if($side == "all", str-slice($name,1,1), str-slice($name,1,1) + str-slice($side,1,1));
+    $side: if($side == "all", $name, $name + "-" + $side);
+    .#{$class}0 {
+        #{$side}: 0px !important;
+    }
+    @for $i from 1 through 6 {
+        .#{$class}#{$i} {
+            #{$side}: $size * $i;
+        }
+    }
+}
+
+$whiteSpace: (
+    "margin",
+    "padding"
+);
+
+$sides: (
+    "all",
+    "left",
+    "right",
+    "top",
+    "bottom"
+);
+
+@each $spacing in $whiteSpace {
+    @each $side in $sides {
+        @include genWhiteSpace($spacing, $side);
+    }
+}

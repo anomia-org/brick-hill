@@ -1,0 +1,115 @@
+version: "3.4"
+
+services:
+    app:
+        build:
+            context: .
+            target: dev
+            dockerfile: Dockerfile
+        restart: unless-stopped
+        command: php artisan octane:start --watch --server=roadrunner --host=0.0.0.0 --workers=1 --max-requests=50
+        volumes:
+            - .:/var/www/html
+        depends_on:
+            - db
+            - redis
+
+    scheduler:
+        profiles:
+            - all-services
+            - scheduler
+        build:
+            context: .
+            target: dev
+            dockerfile: Dockerfile
+        restart: unless-stopped
+        entrypoint: ./docker/scheduler.sh
+        volumes:
+            - .:/var/www/html
+        depends_on:
+            - db
+            - redis
+
+    # queue worker is long running, if the code changes it wont be executed until the worker is restarted
+    # currently not too many features use queues so this is fine but might want to look into a file watching mechanism
+    queue:
+        profiles:
+            - all-services
+            - queue
+        build:
+            context: .
+            target: dev
+            dockerfile: Dockerfile
+        restart: unless-stopped
+        entrypoint: ./docker/queue.sh
+        volumes:
+            - .:/var/www/html
+        depends_on:
+            - db
+            - redis
+
+    webpack:
+        image: node:18-alpine
+        user: 1000:1000
+        restart: unless-stopped
+        working_dir: /var/www/html
+        command: sh -c "npm install && npm run watch"
+        volumes:
+            - .:/var/www/html
+
+    composer:
+        build:
+            context: .
+            target: composer-base
+            dockerfile: Dockerfile
+        command: composer install
+        volumes:
+            - .:/app
+
+    nginx:
+        build:
+            context: .
+            dockerfile: docker/nginx/Dockerfile
+        restart: unless-stopped
+        volumes:
+            - .:/var/www/html
+        depends_on:
+            - app
+        ports:
+            - 80:80
+
+    db:
+        image: mysql:8.0
+        restart: unless-stopped
+        environment:
+            MYSQL_DATABASE: testbh
+            MYSQL_ROOT_PASSWORD: secret
+        ports:
+            - 3306:3306
+        volumes:
+            - ./docker/dev/mysql/init:/docker-entrypoint-initdb.d
+            - dbdata:/var/lib/mysql
+
+    redis:
+        image: redis:alpine
+        restart: unless-stopped
+        ports:
+            - 6379:6379
+
+    opensearch:
+        image: opensearchproject/opensearch:2
+        restart: unless-stopped
+        environment:
+            discovery.type: single-node
+            plugins.security.disabled: "true"
+        ports:
+            - 9200:9200
+            - 9600:9600
+        volumes:
+            - opensearchdata:/usr/share/opensearch/data
+
+volumes:
+    dbdata:
+        driver: local
+    opensearchdata:
+        driver: local

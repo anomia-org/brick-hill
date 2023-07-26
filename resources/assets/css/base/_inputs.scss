@@ -1,0 +1,240 @@
+button, .button, input, textarea, select {
+    border-radius: 2px;
+    font-size: 16px;
+}
+
+select {
+    background: rgba(0, 0, 0, 0);
+    font-weight: 500;
+    // selects have a different height than other inputs for some reason
+    padding: 8px;
+
+    option {
+        @include themify($themes) {
+            background-color: themed("bright");
+        }
+    }
+}
+
+select, input, textarea {
+    @include themify($themes) {
+        border-color: themed("inputs", "border");
+        color: themed("text");
+    }
+
+    &.blend {
+        @include themify($themes) {
+            border-color: themed("inputs", "blend-border");
+        }
+    }
+}
+
+input, textarea {
+    padding: 9px 19px;
+    margin-right: 5px;
+    background: rgba(0, 0, 0, 0);
+    max-width: 100%;  
+
+    &.thin {
+        padding: 5px 10px;
+    }    
+}
+
+input:not(.no-input-display) {
+    &[type="file"] {
+        padding: 0;
+        border: 0;
+    }
+
+    &[type="radio"] {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+
+        &+label {
+            display: inline-block; 
+            position: relative;
+            padding-left: 20px;
+            &:before {
+                content: '';
+                display: block; 
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                border-radius: 50%;
+                margin-right: 5px;
+                width: 12px;
+                height: 12px;
+                background: rgba(0, 0, 0, 0);
+                
+                @include themify($themes) {
+                    border: 2px solid themed("dark");
+                }
+            }
+            &:after{ 
+                content: '';
+                display: block; 
+                width: 8px;
+                height: 8px;
+                position: absolute;
+                border-radius: 50%;
+                top: 4px;
+                left: 4px;
+                opacity: 0;
+                transform: scale(0, 0);
+
+                @include themify($themes) {
+                    background: themed("blue");
+                }
+            }
+        }
+        &:checked+label:before {
+            @include themify($themes) {
+                border: 2px solid themed("blue");
+            }
+        }
+        &:checked+label:after{
+            opacity: 1;
+            transform: scale(1, 1);
+        }
+    }
+
+    &[type="checkbox"] {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+
+        &+label {
+            display: inline-block; 
+            position: relative;
+            padding-left: 25px;
+            cursor: pointer;
+            &:before {
+                content: '';
+                display: block; 
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                border-radius: 3px;
+                margin-right: 5px;
+                width: 12px;
+                height: 12px;
+                background: rgba(0, 0, 0, 0);
+                
+                @include themify($themes) {
+                    border: 2px solid themed("dark");
+                }
+            }
+            &:after { 
+                content: '';
+                display: block; 
+                width: 3px;
+                height: 6px;
+                position: absolute;
+                top: 3px;
+                left: 6px;
+                opacity: 0;
+                transform: scale(0, 0);
+
+                @include themify($themes) {
+                    border-color: themed("blue");
+                }
+            }
+        }
+        &:checked+label:after{
+            border-style: solid;
+            border-width: 0 2px 2px 0;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+            opacity: 1;
+        }
+    }
+
+    &[type="color"] {
+        -webkit-appearance: none;
+        border: none;
+        width: 32px;
+        height: 32px;
+        padding: 0;
+
+        &::-webkit-color-swatch-wrapper {
+            padding: 0;
+        }
+
+        &::-webkit-color-swatch {
+            border: none;
+        }
+    }
+}
+
+input.no-input-display {
+    display: none;
+
+    &[type="radio"]+label {
+        cursor: pointer;
+    }
+
+    &[type="checkbox"]+label {
+        cursor: pointer;
+    }
+}
+
+::placeholder {
+    @include themify() {
+        color: themed("inputs", "placeholder");
+    }
+}
+
+button, .button {
+    text-align: center;
+    display: inline-block;
+    text-transform: uppercase;
+    font-weight: 600;
+    border: 0;
+    padding: 10px 18px;
+    color: #FFF;
+
+    &:not(.no-overflow) {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    &:not(:last-of-type) {
+        margin-right: 20px;
+    }
+
+    &.thin {
+        padding: 5px 20px;
+    }
+
+    @include themify($themes) {
+        &.clear {
+            color: themed("dark");
+            padding: 9px 19px;
+            background: rgba(0, 0, 0, 0);
+            border: 1px solid themed("inputs", "border");
+
+            &.thin {
+                padding: 4px 19px;
+            }
+        }
+
+        @each $class, $vals in map-get($theme-map, "buttons") {
+            &.#{$class}:not([disabled]) {
+                background: map-get($vals, "bg");
+                background: map-get($vals, "gradient");
+            }
+        }
+
+        &[disabled] {
+            background: themed("button-disabled", "bg");
+            background: themed("button-disabled", "gradient");
+        }
+    }
+}

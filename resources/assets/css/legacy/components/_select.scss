@@ -1,0 +1,16 @@
+.select, select {
+    background-color: $select-background-color;
+    border-color: $select-border-color;
+    border-radius: $select-border-radius;
+    font-weight: 600;
+    padding: 8px;
+    color: $select-color;
+
+    option {
+        color: $select-color;
+    }
+
+    &.small-padding {
+        padding: 0 8px;
+    }
+}

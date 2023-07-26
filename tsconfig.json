@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "jsx": "preserve",
+        "module": "esnext",
+        "target": "esnext",
+        "allowJs": true,
+        "noImplicitAny": true,
+        "noImplicitThis": true,
+        "noImplicitReturns": true,
+        "strict": true,
+        "outDir": "./public/dist",
+        "allowSyntheticDefaultImports": true,
+        "paths": {
+            "@/*": ["./resources/assets/js/vue/*"],
+            "components/*": ["./resources/assets/js/vue/components/*"],
+            "media/*": ["./resources/assets/*"]
+        },
+        "moduleResolution": "node",
+        "skipLibCheck": true
+    },
+    "include": ["./resources/assets/js/**/*"],
+    "exclude": ["./public/dist/**/*"]
+}

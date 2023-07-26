@@ -1,0 +1,15 @@
+.git
+/ci
+/node_modules
+/public/dist
+/storage
+/.vscode
+/tests
+.phpunit.result.cache
+rr
+
+# all assets here should be compiled and sent to cdn
+/resources/assets
+
+# the .env shouldnt be included but need to check if its using any of those values before removal from prod
+#.env

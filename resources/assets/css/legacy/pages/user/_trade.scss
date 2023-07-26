@@ -1,0 +1,47 @@
+/* all of this is just copied from the old css */
+
+.old-theme.trade-picker {
+    margin-top: 10px;
+    overflow: hidden;
+    overflow-y: scroll;
+    border-radius: 5px;
+    background-color: $card-bg;
+    max-height: 1024px;
+
+    hr {
+        margin: 4px;
+    }
+
+    .trade {
+        height: 72px;
+        position: relative;
+        cursor: pointer;
+
+        &:hover {
+            background-color: $hover-card-hover
+        }
+
+        &.selected {
+            background-color: $hover-card-viewed;
+            border-left: 4px solid $vertical-tabs-border;
+        }
+    }
+
+    .trade-status {
+        position: absolute;
+        bottom: 5px;
+        right: 10px;
+    }
+
+    .trade-date {
+        position: absolute;
+        top: 5px;
+        right: 10px;
+    }
+
+    .trade-user-thumbnail {
+        float: left;
+        width: 64px;
+        margin:4px;
+    }
+}

@@ -1,0 +1,74 @@
+.status {
+    position: relative;
+    min-height: 80px;
+
+    img {
+        width: 64px;
+        height: 64px;
+        float: left;
+        margin-right: 10px;
+    }
+}
+
+.dashboard-info {
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 10px;
+    .streak-info {
+        p {
+            margin: 0;
+            margin-right: 10px;
+        }
+    }
+    .administrator {
+        margin-top: 5px;
+    }
+}
+
+.status-dashboard {
+    margin: auto;
+    margin-left: 5px;
+    width: 9px;
+    height: 9px;
+}
+
+.avatar-thumbnail {
+    width: 50px;
+}
+
+.post-button {
+    width: 150px;
+}
+
+.post-input {
+    height: 92px;
+}
+
+.no-shadow {
+    box-shadow: none;
+}
+
+.no-rounded {
+    border-radius: 0;
+}
+
+.no-margin {
+    margin: 0;
+}
+
+.vmargin-6 {
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+
+.space-between {
+    justify-content: space-between;
+}
+
+.dash-info {
+    width: auto;
+}
+
+.value-svg {
+    margin-top: 5px;
+}
